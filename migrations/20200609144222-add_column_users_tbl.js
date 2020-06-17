@@ -26,7 +26,7 @@ module.exports = {
         email:  Sequelize.STRING,
         dob:  Sequelize.DATE,
         password: Sequelize.TEXT,
-        roll:Sequelize.INTEGER
+        roll_no:Sequelize.INTEGER
       }
     ) 
   },

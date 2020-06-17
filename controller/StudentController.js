@@ -1,15 +1,16 @@
-let User = require('../model/user');
-var express = require('express');
-const router    = express.Router();
+let User     = require('../model/user');
+let Constant = require('../model/constant');
+var express  = require('express');
+const router = express.Router();
 
 exports.getStudentList = (req, res) =>{
-    User.findAll({attributes:['id', 'firstname','lastname', 'roll', 'gender', 'section','address', 'dob', 'phone', 'email', 'class'] ,raw:true}).then(function (result) { 
+    User.findAll({where:{role:Constant.STUDENT},attributes:['id', 'firstname','lastname', 'roll_no', 'gender', 'section','address', 'dob', 'phone', 'email', 'class'] ,raw:true}).then(function (result) { 
          res.render('all-students', {title: 'Student', data: result });  
       });    
 }
 
 exports.getStudentDetail = (req, res) =>{ 
-    User.findAll({where:{id:req.params.id}, attributes: ['id', 'firstname', 'lastname','roll', 'gender', 'section','address', 'dob', 'phone', 'email', 'class'], raw:true}).then(function (result) { 
+    User.findAll({where:{id:req.params.id}, attributes: ['id', 'firstname', 'lastname','roll_no', 'gender', 'section','address', 'dob', 'phone', 'email', 'class'], raw:true}).then(function (result) { 
         res.render('student-details', {title: 'Student', data: result[0] });  
      });
 }
@@ -24,7 +25,7 @@ exports.postStudentAdmissionForm = (req, res) => {
         lastname:req.body.lastname,
         class:req.body.class,
         section:req.body.section,
-        roll:req.body.roll,
+        roll_no:req.body.roll_no,
         admission_id:req.body.admission_id,
         description:req.body.description,
         religion:req.body.religion,

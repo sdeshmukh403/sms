@@ -24,8 +24,13 @@ module.exports = {
       // queryInterface.addColumn('users', 'blood_grp', {
       //   type: Sequelize.STRING,
       // }),
-      queryInterface.addColumn('users', 'description', {
-        type: Sequelize.TEXT,
+      // queryInterface.addColumn('users', 'description', {
+      //   type: Sequelize.TEXT,
+      // }),
+      queryInterface.addColumn('users', 'role', {
+        type: Sequelize.INTEGER,
+      },{
+        comment: "This is a comment"
       })
     ]);
 

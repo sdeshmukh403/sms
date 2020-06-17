@@ -29,7 +29,7 @@ var User = sequelize.define('users', {
     date:{
         type:Sequelize.DATE
     },
-    roll:{
+    roll_no:{
         type:Sequelize.STRING  
     },
     password:{

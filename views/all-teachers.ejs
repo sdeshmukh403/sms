@@ -7,20 +7,19 @@
                             <table class="table display data-table text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>
+                                        <th> 
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input checkAll">
-                                                <label class="form-check-label">Roll No</label>
+                                                <label class="form-check-label">ID</label>
                                             </div>
                                         </th>
                                         <th>Photo</th>
                                         <th>Name</th>
                                         <th>Gender</th>
                                         <th>Class</th>
+                                        <th>Subject</th>
                                         <th>Section</th>
-                                        <th>Parents</th>
                                         <th>Address</th>
-                                        <th>Date Of Birth</th>
                                         <th>Phone</th>
                                         <th>E-mail</th>
                                         <th></th>
@@ -28,49 +27,43 @@
                                 </thead>
                                 <tbody>
                                     <% if (typeof data != "undefined" && data != null) { %>
-                                        <% for(let student of data) { %> 
+                                        <% for (let teacher of data) { %> 
                                     <tr>
                                         <td>
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input">
-                                                <label class="form-check-label"><%= student.roll_id %></label>
+                                                <label class="form-check-label">#0021</label>
                                             </div>
                                         </td>
                                         <td class="text-center"><img src="img/figure/student2.png" alt="student"></td>
-                                        <td><%= student.firstname + " " + student.lastname %></td>
-                                        <td><%= student.gender %></td>
-                                        <td><%= student.class %></td>
-                                        <td><%= student.section %></td>
-                                        <td><%= student.section %></td>
-                                        <td><%= student.address %></td>
-                                        <td><%= student.dob %></td>
-                                        <td><%= student.phone %></td>
-                                        <td><%= student.email %></td>
-                                        <td>
+                                        <td><%= teacher.firstname %> <%= teacher.lastname %></td>
+                                        <td><%= teacher.gender %></td>
+                                        <td><%= teacher.class %></td>
+                                        <td><%= teacher.subject %></td>
+                                        <td><%= teacher.section %></td>
+                                        <td><%= teacher.address %></td>
+                                        <td><%= teacher.phone %></td>
+                                        <td><%= teacher.email %></td>
+                                         <td>
                                             <div class="dropdown">
-                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                    aria-expanded="false">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                     <span class="flaticon-more-button-of-three-dots"></span>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="view-student/<%= student.id %>"><i
-                                                        class="fas fa-eye text-default-peel"></i>View</a>                                      
-                                                    <a class="dropdown-item" href="#"><i
-                                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                                    <a class="dropdown-item" href="#"><i
-                                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                                    <a class="dropdown-item" href="#"><i
-                                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                                                    <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                                                    <a class="dropdown-item" href="#"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                                    <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                     <% }
-                                        } %> 
-   
+                                } %> 
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                    <% include ../partials/footer.html %>
+                <!-- Teacher Table Area End Here -->
+                <% include ../partials/footer.html %>

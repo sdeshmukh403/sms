@@ -3,7 +3,12 @@ var router = express.Router();
 let homeController = require('../controller/HomeController');
 let subjectController = require('../controller/SubjectController');
 let studentController = require('../controller/StudentController');
+let teacherController = require('../controller/TeacherController');
+let parentController = require('../controller/ParentController');
+
+
 const fs = require('fs')
+
 const path = require('path')
 /* GET home page. */
 router.get('/', homeController.getDashboard);
@@ -18,6 +23,13 @@ router.get('/all-students', studentController.getStudentList);
 router.get('/view-student/:id', studentController.getStudentDetail);
 router.get('/student-admission-form', studentController.getStudentAdmissionForm);
 router.post('/student-admission-form', studentController.postStudentAdmissionForm);
+
+//teacher page
+router.get('/all-teachers', teacherController.getTeacherList);
+
+//parent page
+router.get('/all-parents', parentController.getParentList);
+
 
 router.get('/video', function(req, res) {
 	const path = '../public/assets/videos/sample.mp4';
