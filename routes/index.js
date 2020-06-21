@@ -5,6 +5,8 @@ let subjectController = require('../controller/SubjectController');
 let studentController = require('../controller/StudentController');
 let teacherController = require('../controller/TeacherController');
 let parentController = require('../controller/ParentController');
+let sectionController = require('../controller/SectionController');
+let religionController = require('../controller/ReligionController');
 
 
 const fs = require('fs')
@@ -30,6 +32,13 @@ router.get('/all-teachers', teacherController.getTeacherList);
 //parent page
 router.get('/all-parents', parentController.getParentList);
 
+//section page
+router.get('/all-sections', sectionController.getSectionList);
+router.post('/add-section', sectionController.postAddSection);
+
+//religion page
+router.get('/all-religions', religionController.getReligionList);
+router.post('/add-religion', religionController.postAddReligion);
 
 router.get('/video', function(req, res) {
 	const path = '../public/assets/videos/sample.mp4';

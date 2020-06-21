@@ -1,12 +1,15 @@
 let User     = require('../model/user');
+let Section  = require('../model/section');
 let Constant = require('../model/constant');
+let Religion   = require('../model/religion');
+
 var express  = require('express');
 const router = express.Router();
 
 exports.getStudentList = (req, res) =>{
-    User.findAll({where:{role:Constant.STUDENT},attributes:['id', 'firstname','lastname', 'roll_no', 'gender', 'section','address', 'dob', 'phone', 'email', 'class'] ,raw:true}).then(function (result) { 
-         res.render('all-students', {title: 'Student', helper:require('../public/helper'), main_heading:'All Students', sub_heading:'All student data', data: result });  
-      });    
+  User.findAll({where:{role:Constant.STUDENT},attributes:['id', 'firstname','lastname', 'roll_no', 'gender', 'section','address', 'dob', 'phone', 'email', 'class'] ,raw:true}).then(function (students) {
+        res.render('all-students', {title: 'Student', helper:require('../public/helper'), main_heading:'All Students', sub_heading:'All student data', data: students });  
+     });
 }
 
 exports.getStudentDetail = (req, res) =>{ 
@@ -16,8 +19,12 @@ exports.getStudentDetail = (req, res) =>{
 }
 
 exports.getStudentAdmissionForm = (req, res) => {
-    res.render('admit-form', {title: 'Student',  main_heading:'Student Admit Form', sub_heading:'Add New Student'});
-}
+  Religion.findAll({attributes:['id', 'name'] ,raw:true}).then(function (religions) {
+  Section.findAll({attributes:['id', 'name'] ,raw:true}).then(function (sections) {
+    res.render('admit-form', {title: 'Student',  main_heading:'Student Admit Form', sub_heading:'Add New Student', sections:sections, religions:religions});
+  });    
+});
+  }
 
 exports.postStudentAdmissionForm = (req, res) => {
     User.create({
