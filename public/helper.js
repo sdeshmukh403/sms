@@ -16,8 +16,10 @@ var func = {
         }
         return gender_name;
     }, 
-    foo: function(date) {
-        //do somethings
+    convertDate: (date) => {
+        if(date){
+       return date.split("-").reverse().join("/");
+    }
     }    
 };
 module.exports = func;

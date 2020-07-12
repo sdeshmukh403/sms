@@ -1,6 +1,4 @@
 let Religion   = require('../model/religion');
-var express  = require('express');
-const router = express.Router();
 
 exports.getReligionList = (req, res) =>{
     Religion.findAll({attributes:['id', 'name'] ,raw:true}).then(function (result) { 

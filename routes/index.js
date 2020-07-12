@@ -7,6 +7,7 @@ let teacherController = require('../controller/TeacherController');
 let parentController = require('../controller/ParentController');
 let sectionController = require('../controller/SectionController');
 let religionController = require('../controller/ReligionController');
+let classnameController = require('../controller/ClassnameController');
 
 
 const fs = require('fs')
@@ -21,10 +22,14 @@ router.get('/all-subjects', subjectController.getSubjectList);
 router.post('/add-subject', subjectController.postAddSubject);
 
 // student page
-router.get('/all-students', studentController.getStudentList);
+router.get('/all-students/:roll_no?/:firstname?/:classname?', studentController.getStudentList);
 router.get('/view-student/:id', studentController.getStudentDetail);
 router.get('/student-admission-form', studentController.getStudentAdmissionForm);
 router.post('/student-admission-form', studentController.postStudentAdmissionForm);
+router.get('/edit-student/:id', studentController.getEditStudent);
+router.post('/edit-student', studentController.postEditStudent);
+router.get('/delete-user/:id', studentController.deleteUser);
+router.post('/students-bulk-delete', studentController.deleteUsers);
 
 //teacher page
 router.get('/all-teachers', teacherController.getTeacherList);
@@ -39,6 +44,11 @@ router.post('/add-section', sectionController.postAddSection);
 //religion page
 router.get('/all-religions', religionController.getReligionList);
 router.post('/add-religion', religionController.postAddReligion);
+
+//class name page
+router.get('/all-classes', classnameController.getClassnameList);
+router.post('/add-classname', classnameController.postAddClassname);
+
 
 router.get('/video', function(req, res) {
 	const path = '../public/assets/videos/sample.mp4';

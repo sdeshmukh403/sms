@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../database/sequelize_connection');
-
+const ClassName = require('./classname');
+const Section = require('./section');
 var User = sequelize.define('users', {
     firstname:{
         type: Sequelize.STRING
@@ -9,13 +10,13 @@ var User = sequelize.define('users', {
         type: Sequelize.STRING, 
     },
     gender:{
-        type:Sequelize.INTEGER
+        type:Sequelize.STRING
     }, 
     class:{
         type:Sequelize.INTEGER
     },    
-    section:{
-        type:Sequelize.STRING
+    section_id:{
+        type:Sequelize.INTEGER
     },
     class:{
         type:Sequelize.INTEGER
@@ -26,7 +27,7 @@ var User = sequelize.define('users', {
     email:{
         type:Sequelize.STRING
     },
-    date:{
+    dob:{
         type:Sequelize.DATE
     },
     roll_no:{
@@ -35,8 +36,8 @@ var User = sequelize.define('users', {
     password:{
         type:Sequelize.STRING
     },
-    class:{
-        type:Sequelize.INTEGER
+    role:{
+        type:Sequelize.STRING
     },
     religion:{
         type:Sequelize.INTEGER
@@ -44,12 +45,16 @@ var User = sequelize.define('users', {
     admission_date:{
         type:Sequelize.DATE
     },
+    admission_id:{
+        type:Sequelize.INTEGER
+    },
     blood_grp:{
         type:Sequelize.STRING
     },
     description:{
         type:Sequelize.TEXT
     }
-});
+ } );
+
 
 module.exports = User;

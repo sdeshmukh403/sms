@@ -1,6 +1,4 @@
 let Section   = require('../model/section');
-var express  = require('express');
-const router = express.Router();
 
 exports.getSectionList = (req, res) =>{
     Section.findAll({attributes:['id', 'name'] ,raw:true}).then(function (result) { 

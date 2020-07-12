@@ -18,7 +18,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const session = require('express-session');
+const flash = require('connect-flash');
 
+app.use(session({
+	secret:'sess',
+	saveUninitialized: true,
+	resave: true
+}));
+
+app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
