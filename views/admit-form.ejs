@@ -3,7 +3,7 @@
 <% include ../partials/sidebar.html %>
 <% include ../partials/list-breadcum.html %>
 </div>
-                        <form class="new-added-form" action="student-admission-form" method="POST">
+                        <form class="new-added-form" action="student-admission-form" method="POST" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>First Name *</label>
@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="col-lg-6 col-12 form-group mg-t-30">
                                     <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
-                                    <input type="file" class="form-control-file">
+                                    <input type="file" class="form-control-file" name="photo">
                                 </div>
                                 <div class="col-12 form-group mg-t-8">
                                     <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>

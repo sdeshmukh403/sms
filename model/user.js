@@ -14,7 +14,10 @@ var User = sequelize.define('users', {
     }, 
     class:{
         type:Sequelize.INTEGER
-    },    
+    },  
+    image:{
+        type:Sequelize.STRING
+    },   
     section_id:{
         type:Sequelize.INTEGER
     },

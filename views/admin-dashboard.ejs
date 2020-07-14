@@ -1,4 +1,6 @@
-
+<% include ../partials/header.html %>
+<% include ../partials/nav.html %>
+<% include ../partials/sidebar.html %>
             <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
@@ -24,7 +26,9 @@
                                 <div class="col-6">
                                     <div class="item-content">
                                         <div class="item-title">Students</div>
-                                        <div class="item-number"><span class="counter" data-num="150000">1,50,000</span></div>
+                                        <div class="item-number"><span class="counter" data-num="<%= students_count %>
+                                            "><%= students_count %>
+                                        </span></div>
                                     </div>
                                 </div>
                             </div>
@@ -201,11 +205,11 @@
                                 <div class="student-report">
                                     <div class="student-count pseudo-bg-blue">
                                         <h4 class="item-title">Female Students</h4>
-                                        <div class="item-number">45,000</div>
+                                        <div class="item-number"><%= students_female_count %></div>
                                     </div>
                                     <div class="student-count pseudo-bg-yellow">
                                         <h4 class="item-title">Male Students</h4>
-                                        <div class="item-number">1,05,000</div>
+                                        <div class="item-number"><%= students_male_count %></div>
                                     </div>
                                 </div>
                             </div>
@@ -360,4 +364,4 @@
                     </div>
                 </div>
                 <!-- Dashboard Content End Here -->
-        
+                <% include ../partials/footer.html %>

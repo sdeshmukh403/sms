@@ -8,6 +8,7 @@ let parentController = require('../controller/ParentController');
 let sectionController = require('../controller/SectionController');
 let religionController = require('../controller/ReligionController');
 let classnameController = require('../controller/ClassnameController');
+let dashboardController = require('../controller/DashboardController');
 
 
 const fs = require('fs')
@@ -21,18 +22,26 @@ res.render('test');
 router.get('/all-subjects', subjectController.getSubjectList);
 router.post('/add-subject', subjectController.postAddSubject);
 
+//Admin dashboard
+router.get('/admin-dashboard', dashboardController.getAdminDashboard);
+
 // student page
 router.get('/all-students/:roll_no?/:firstname?/:classname?', studentController.getStudentList);
 router.get('/view-student/:id', studentController.getStudentDetail);
 router.get('/student-admission-form', studentController.getStudentAdmissionForm);
 router.post('/student-admission-form', studentController.postStudentAdmissionForm);
 router.get('/edit-student/:id', studentController.getEditStudent);
-router.post('/edit-student', studentController.postEditStudent);
+router.post('/update-student', studentController.postUpdateStudent);
 router.get('/delete-user/:id', studentController.deleteUser);
 router.post('/students-bulk-delete', studentController.deleteUsers);
 
 //teacher page
-router.get('/all-teachers', teacherController.getTeacherList);
+router.get('/all-teachers/:roll_no?/:firstname?/:classname?', teacherController.getTeacherList);
+router.get('/view-teacher/:id', teacherController.getTeacherDetail);
+router.get('/teacher-admission-form', teacherController.getTeacherAdmissionForm);
+router.post('/teacher-admission-form', teacherController.postTeacherAdmissionForm);
+router.get('/edit-teacher/:id', teacherController.getEditTeacher);
+router.post('/update-teacher', teacherController.postUpdateTeacher);
 
 //parent page
 router.get('/all-parents', parentController.getParentList);
