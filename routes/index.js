@@ -44,7 +44,12 @@ router.get('/edit-teacher/:id', teacherController.getEditTeacher);
 router.post('/update-teacher', teacherController.postUpdateTeacher);
 
 //parent page
-router.get('/all-parents', parentController.getParentList);
+router.get('/all-parents/:roll_no?/:firstname?/:classname?', parentController.getParentList);
+router.get('/view-parent/:id', parentController.getParentDetail);
+router.get('/parent-admission-form', parentController.getParentAdmissionForm);
+router.post('/parent-admission-form', parentController.postParentAdmissionForm);
+router.get('/edit-parent/:id', parentController.getEditParent);
+router.post('/update-parent', parentController.postUpdateParent);
 
 //section page
 router.get('/all-sections', sectionController.getSectionList);

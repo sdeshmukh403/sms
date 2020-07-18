@@ -1,0 +1,58 @@
+<% include ../partials/header.html %>
+<% include ../partials/nav.html %>
+<% include ../partials/sidebar.html %>
+<% include ../partials/list-breadcum.html %>
+                        </div>
+                        <div class="single-info-details">
+                            <div style="width:35%" class="item-img" >
+                                <img src="/uploads/parent/<%= data.image %>" alt="parent">
+                            </div>
+                            <div class="item-content">
+                                <div class="header-inline item-header">
+                                    <h3 class="text-dark-medium font-medium"><%= data.firstname + " " + data.lastname %></h3>
+                                    <div class="header-elements">
+                                        <ul>
+                                            <li><a href="/edit-parent/<%= data.id %>"><i class="far fa-edit"></i></a></li>
+                                            <li><a href="#"><i class="fas fa-print"></i></a></li>
+                                            <li><a href="/download-parent"><i class="fas fa-download"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <p>Aliquam erat volutpat. Curabiene natis massa sedde lacu stiquen sodale 
+                                word moun taiery.Aliquam erat volutpaturabiene natis massa sedde  sodale 
+                                word moun taiery.</p>
+                                <div class="info-table table-responsive">
+                                    <table class="table text-nowrap">
+                                        <tbody>
+                                            <tr>
+                                                <td>Name:</td>
+                                                <td class="font-medium text-dark-medium"><%= data.firstname + " " + data.lastname %> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gender:</td>
+                                                <td class="font-medium text-dark-medium"><%= helper.gender_name(data.gender) %></td>
+                                            </tr>                                                                            
+                                            <tr>
+                                                <td>E-mail:</td>
+                                                <td class="font-medium text-dark-medium"><%= data.email %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>ID No:</td>
+                                                <td class="font-medium text-dark-medium"><%= data.parent_id %></td>
+                                            </tr>                                
+                                                <td>Address:</td>
+                                                <td class="font-medium text-dark-medium"><%= data.address %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone:</td>
+                                                <td class="font-medium text-dark-medium"><%= data.phone %></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Student Table Area End Here -->
+                <% include ../partials/footer.html %>

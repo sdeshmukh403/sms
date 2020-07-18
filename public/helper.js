@@ -1,4 +1,6 @@
 let Constant = require('../model/constant');
+let User  = require('../model/user');
+
 var func = {
     gender_name: function(gender_id) {        
         switch(gender_id){
@@ -20,6 +22,6 @@ var func = {
         if(date){
        return date.split("-").reverse().join("/");
     }
-    }    
-};
+    }
+}
 module.exports = func;

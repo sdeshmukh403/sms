@@ -63,7 +63,8 @@ exports.getStudentAdmissionForm = (req, res) => {
 const upload = multer({ storage: storage });
 
 exports.postStudentAdmissionForm =  [upload.single('photo'),(req, res) => {
- 
+  let image =""
+  if(req.file != undefined)  {image = req.file.filename } 
   d = req.body.dob;
   date = d.split("/").reverse().join("-");
  User.create({
@@ -80,7 +81,7 @@ exports.postStudentAdmissionForm =  [upload.single('photo'),(req, res) => {
         dob:date,
         role:'3',
         blood_grp:req.body.blood_grp,
-        image:req.file.filename
+        image:image
       }).then(result=>{
         req.flash('success-msg', "Student added successfully")  ;
         req.flash('success-class', "success")  ;

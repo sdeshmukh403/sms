@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../database/sequelize_connection');
-const ClassName = require('./classname');
-const Section = require('./section');
+
 var User = sequelize.define('users', {
     firstname:{
         type: Sequelize.STRING
@@ -18,6 +17,9 @@ var User = sequelize.define('users', {
     image:{
         type:Sequelize.STRING
     },   
+    subject:{
+        type:Sequelize.STRING
+    }, 
     section_id:{
         type:Sequelize.INTEGER
     },
@@ -51,11 +53,20 @@ var User = sequelize.define('users', {
     admission_id:{
         type:Sequelize.INTEGER
     },
+    teacher_id:{
+        type:Sequelize.INTEGER
+    },
     blood_grp:{
         type:Sequelize.STRING
     },
     description:{
         type:Sequelize.TEXT
+    },
+    address:{
+        type:Sequelize.TEXT
+    },
+    father_occupation:{
+        type:Sequelize.STRING
     }
  } );
 

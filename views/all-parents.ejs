@@ -2,6 +2,8 @@
 <% include ../partials/nav.html %>
 <% include ../partials/sidebar.html %>
 <% include ../partials/list-breadcum.html %>
+<% include ../partials/filter.html %>
+<% include ../partials/success.html %> 
                         <div class="table-responsive">
                             <table class="table display data-table text-nowrap">
                                 <thead>
@@ -23,8 +25,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% if (typeof data != "undefined" && data != null) { %>
-                                        <% for(let parent of data) { %>
+                                    <% if (typeof datas != "undefined" && datas != null) { %>
+                                        <% for(let data of datas) { %>
                                     <tr>
                                         <td>
                                             <div class="form-check">
@@ -32,13 +34,13 @@
                                                 <label class="form-check-label">#0021</label>
                                             </div>
                                         </td>
-                                        <td class="text-center"><img src="img/figure/student2.png" alt="student"></td>
-                                        <td><%= parent.firstname + " " + parent.lastname %></td>
-                                        <td><%= parent.gender %></td>
-                                        <td>Businessman</td>
-                                        <td><%= parent.address %></td>
-                                        <td><%= parent.phone %></td>
-                                        <td><%= parent.email %></td>
+                                        <td class="text-center"><img src="uploads/parent/<%= data.image %>" alt="student"></td>
+                                        <td><%= data.firstname + " " + data.lastname %></td>
+                                        <td><%= helper.gender_name(data.gender) %></td>
+                                        <td><%= data.father_occupation %></td>
+                                        <td><%= data.address %></td>
+                                        <td><%= data.phone %></td>
+                                        <td><%= data.email %></td>
                                         <td>
                                             <div class="dropdown">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -46,13 +48,13 @@
                                                     <span class="flaticon-more-button-of-three-dots"></span>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#"><i
-                                                            class="fas fa-times text-orange-red"></i>Close</a>
-                                                    <a class="dropdown-item" href="#"><i
-                                                            class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
-                                                    <a class="dropdown-item" href="#"><i
-                                                            class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
-                                                </div>
+                                                    <a class="dropdown-item" href="view-parent/<%= data.id %>"><i
+                                                        class="fas fa-eye text-default-peel"></i>View</a>                                      
+                                                    <a class="dropdown-item" href="delete-user/<%= data.id %>"><i
+                                                            class="fas fa-times text-orange-red"></i>Delete</a>
+                                                    <a class="dropdown-item" href="/edit-parent/<%= data.id %>"><i
+                                                            class="fas fa-edit text-dark-pastel-green"></i>Edit</a>
+                                                     </div>
                                             </div>
                                         </td>
                                     </tr>
@@ -65,3 +67,6 @@
                 </div>
                 <!-- Teacher Table Area End Here -->
                 <% include ../partials/footer.html %>
+<script>
+    $('.addNew'). attr("href", '/parent-admission-form');
+</script>   

@@ -1,7 +1,7 @@
 <% include ../partials/header.html %>
 <% include ../partials/nav.html %>
 <% include ../partials/sidebar.html %>
-            <div class="dashboard-content-one">
+                <div class="dashboard-content-one">
                 <!-- Breadcubs Area Start Here -->
                 <div class="breadcrumbs-area">
                     <h3>Admin Dashboard</h3>
@@ -45,7 +45,7 @@
                                 <div class="col-6">
                                     <div class="item-content">
                                         <div class="item-title">Teachers</div>
-                                        <div class="item-number"><span class="counter" data-num="2250">2,250</span></div>
+                                        <div class="item-number"><span class="counter" data-num="<%= teachers_count %>"><%= teachers_count %></span></div>
                                     </div>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                 <div class="col-6">
                                     <div class="item-content">
                                         <div class="item-title">Parents</div>
-                                        <div class="item-number"><span class="counter" data-num="5690">5,690</span></div>
+                                        <div class="item-number"><span class="counter" data-num="<%= parents_count %>"><%= parents_count %></span></div>
                                     </div>
                                 </div>
                             </div>

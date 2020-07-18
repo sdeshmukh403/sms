@@ -51,15 +51,15 @@
                                         <td>
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input">
-                                                <label class="form-check-label">#0021</label>
+                                                <label class="form-check-label">#<%= data.teacher_id %></label>
                                             </div>
                                         </td>
-                                        <td class="text-center"><img src="uploads/teacher/<%= data.image %>" alt="teacher"></td>
+                                        <td class="text-center"><img style="width: 100px; height: 70px;" src="uploads/teacher/<%= data.image %>" alt="teacher"></td>
                                         <td><%= data.firstname %> <%= data.lastname %></td>
-                                        <td><%= data.gender %></td>
+                                        <td><%= helper.gender_name(data.gender) %></td>
                                         <td><%= data.class %></td>
                                         <td><%= data.subject %></td>
-                                        <td><%= data.section %></td>
+                                        <td><%= data.section_id %></td>
                                         <td><%= data.address %></td>
                                         <td><%= data.phone %></td>
                                         <td><%= data.email %></td>
@@ -76,3 +76,6 @@
                 <!-- Teacher Table Area End Here -->
                 <% include ../partials/fadeout.html %>
                 <% include ../partials/footer.html %>
+<script>
+$('.addNew'). attr("href", '/teacher-admission-form');
+</script>                

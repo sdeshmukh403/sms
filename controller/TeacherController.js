@@ -15,7 +15,7 @@ exports.getTeacherList = (req, res) =>{
     if(req.query.classname) filterWhere.class =req.query.classname;  
   }
     User.findAll({where: filterWhere,
-      attributes:['id', 'image', 'firstname','lastname', 'roll_no', 'gender', 'section_id','address', 'dob', 'phone', 'email', 'class'] ,
+      attributes:['id', 'image', 'firstname','subject','lastname', 'roll_no', 'gender','teacher_id', 'section_id','address', 'dob', 'phone', 'email', 'class'] ,
       raw:true,
       order: [
         ['id', 'DESC']
@@ -50,7 +50,7 @@ exports.getTeacherAdmissionForm = (req, res) => {
                 classnames:classnames
               }
 
-    res.render('admit-form',  data );
+    res.render('teacher-admit-form',  data );
   });    
 });
   });
@@ -67,29 +67,34 @@ exports.getTeacherAdmissionForm = (req, res) => {
 const upload = multer({ storage: storage });
 
 exports.postTeacherAdmissionForm =  [upload.single('photo'),(req, res) => {
- 
+  let image =""
+  if(req.file != undefined)  {image = req.file.filename } 
   d = req.body.dob;
   date = d.split("/").reverse().join("-");
  User.create({
         firstname:req.body.firstname,
         lastname:req.body.lastname,
         class:req.body.class,
-        roll_no:req.body.roll_no,
-        admission_id:req.body.admission_id,
+        teacher_id:req.body.teacher_id,
+        section_id:req.body.section_id,
+        address:req.body.address,
         description:req.body.description,
         religion:req.body.religion,
         email:req.body.email,
+        subject:req.body.subject,
+        section_id:req.body.section_id,
         phone:req.body.phone,
         gender:req.body.gender,
         dob:date,
-        role:'3',
+        role:'2',
         blood_grp:req.body.blood_grp,
-        image:req.file.filename
+        image:image
       }).then(result=>{
         req.flash('success-msg', "Teacher added successfully")  ;
         req.flash('success-class', "success")  ;
         return res.redirect('all-teachers'); 
       }).catch(err => {
+        console.log(err);
         return res.redirect('teacher-admission-form');
    })
    }]
@@ -130,15 +135,17 @@ exports.postTeacherAdmissionForm =  [upload.single('photo'),(req, res) => {
       firstname:req.body.firstname,
       lastname:req.body.lastname,
       class:req.body.class,
-      roll_no:req.body.roll_no,
-      admission_id:req.body.admission_id,
+      student_id:req.body.student_id,
+      address:req.body.address,
       description:req.body.description,
       religion:req.body.religion,
       email:req.body.email,
       phone:req.body.phone,
+      subject:req.body.subject,
+      section_id:req.body.section_id,
       gender:req.body.gender,
       dob:date,
-      role:'3',
+      role:'2',
       blood_grp:req.body.blood_grp,
       image:image},
      { where:{id:req.body.id}}).then(result=>{

@@ -2,20 +2,19 @@
 <% include ../partials/nav.html %>
 <% include ../partials/sidebar.html %>
 <% include ../partials/list-breadcum.html %>
-
-</div>
+                        </div>
                         <div class="single-info-details">
                             <div style="width:35%" class="item-img" >
-                                <img src="/uploads/student/<%= data.image %>" alt="student">
+                                <img src="/uploads/teacher/<%= data.image %>" alt="teacher">
                             </div>
                             <div class="item-content">
                                 <div class="header-inline item-header">
                                     <h3 class="text-dark-medium font-medium"><%= data.firstname + " " + data.lastname %></h3>
                                     <div class="header-elements">
                                         <ul>
-                                            <li><a href="/edit-student/<%= data.id %>"><i class="far fa-edit"></i></a></li>
+                                            <li><a href="/edit-teacher/<%= data.id %>"><i class="far fa-edit"></i></a></li>
                                             <li><a href="#"><i class="fas fa-print"></i></a></li>
-                                            <li><a href="/download-student"><i class="fas fa-download"></i></a></li>
+                                            <li><a href="/download-teacher"><i class="fas fa-download"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -58,8 +57,8 @@
                                                 <td class="font-medium text-dark-medium"><%= data.email %></td>
                                             </tr>
                                             <tr>
-                                                <td>Admission Date:</td>
-                                                <td class="font-medium text-dark-medium"><%= data.admission_date %></td>
+                                                <td>ID No:</td>
+                                                <td class="font-medium text-dark-medium"><%= data.teacher_id %></td>
                                             </tr>
                                             <tr>
                                                 <td>Class:</td>
@@ -70,8 +69,8 @@
                                                 <td class="font-medium text-dark-medium"><%= data.section_id %></td>
                                             </tr>
                                             <tr>
-                                                <td>Roll:</td>
-                                                <td class="font-medium text-dark-medium"><%= data.roll_no %></td>
+                                                <td>Subject:</td>
+                                                <td class="font-medium text-dark-medium"><%= data.subject %></td>
                                             </tr>
                                             <tr>
                                                 <td>Address:</td>
@@ -88,5 +87,5 @@
                         </div>
                     </div>
                 </div>
-                <!-- Student Details Area End Here -->
+                <!-- Student Table Area End Here -->
                 <% include ../partials/footer.html %>
