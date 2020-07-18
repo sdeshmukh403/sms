@@ -27,6 +27,21 @@
    <!-- Custom Js -->
    <script src="/js/main.js"></script>
    <script src="/js/datepicker.min.js"></script>
+   <script>
+      function add(url){
+            $.ajax({
+               method:"post",
+               url:'/'+url,
+               data: $('.new-added-form').serialize(),
+               success:function(data){    
+                     if(data.success == true){
+                     successHtml = '<div class="alert alert-success" ><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Success! </strong>'+data.msg+'</div>'
+                     $('#json-msg').html(successHtml).fadeOut(11500);
+                  }
+               }
+            });
+                } 
+   </script>
    </body>
 
 

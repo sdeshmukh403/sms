@@ -14,13 +14,15 @@
                             <a href="<%= list_url  %>"><%=  list_heading  %></a>
                         </li>
                         <% } %>
-                        <li><%= main_heading %></li>
+                        <% if(typeof main_heading != "undefined"){ %>
+                            <li><%= main_heading %></li>
+                            <% } %>                        
                     </ul>                   
                     </div> 
                     </div>  
                     <div class="col-3 breadcrumbs-area">
-                    <button class="btn btn-large btn-primary" onclick='window.location.reload()'><i
-                        class="fas fa-redo-alt text-orange-peel"></i></button>
+                    <a class="btn btn-large btn-primary" href="<%= typeof active_path != 'undefined' ? active_path:'' %>"><i
+                        class="fas fa-redo-alt text-orange-peel"></i></a>
                     </div>
                     </div>
                     
@@ -30,6 +32,8 @@
                     <div class="card-body">
                         <div class="heading-layout1">
                             <div class="item-title">
-                                <h3><%= sub_heading %></h3>
+                                <% if(typeof sub_heading != "undefined"){ %>
+                                    <h3><%= sub_heading %></h3>
+                                    <% } %>                                
                             </div>
                        

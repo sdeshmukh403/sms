@@ -14,12 +14,14 @@ exports.getStudentList = (req, res) =>{
     if(req.query.firstname) filterWhere.firstname =req.query.firstname;
     if(req.query.classname) filterWhere.class =req.query.classname;  
   }
+  active_path = req.path.split('/')[1]
+
   User.findAll({where: filterWhere, 
     attributes:['id', 'image', 'firstname','lastname', 'roll_no', 'gender', 'section_id','address', 'dob', 'phone', 'email', 'class'] , 
   raw:true, order: [
     ['id', 'DESC']
 ]}).then(function (students) {
-  res.render('all-students', {title: 'Student', helper:require('../public/helper'),
+  res.render('all-students', {title: 'Student',active_path:active_path, helper:require('../public/helper'),
   msg: req.flash('success-msg'),
    main_heading:'All Students', sub_heading:'All student data', data: students });  
      });

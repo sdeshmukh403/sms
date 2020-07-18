@@ -1,6 +1,4 @@
 let Subject = require('../model/subject');
-var express = require('express');
-const router    = express.Router();
 
 exports.getSubjectList = (req, res) =>{
     Subject.findAll({attributes:['id', 'name', 'board', 'class'] ,raw:true}).then(function (result) { 

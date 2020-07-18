@@ -9,6 +9,7 @@ let sectionController = require('../controller/SectionController');
 let religionController = require('../controller/ReligionController');
 let classnameController = require('../controller/ClassnameController');
 let dashboardController = require('../controller/DashboardController');
+let noticeController = require('../controller/NoticeController');
 
 
 const fs = require('fs')
@@ -50,6 +51,10 @@ router.get('/parent-admission-form', parentController.getParentAdmissionForm);
 router.post('/parent-admission-form', parentController.postParentAdmissionForm);
 router.get('/edit-parent/:id', parentController.getEditParent);
 router.post('/update-parent', parentController.postUpdateParent);
+
+//notice page
+router.get('/all-notices', noticeController.getNoticeList);
+router.post('/add-notice', noticeController.postAddNotice);
 
 //section page
 router.get('/all-sections', sectionController.getSectionList);

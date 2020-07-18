@@ -326,12 +326,16 @@
                                     </div>
                                 </div>
                                 <div class="notice-box-wrap">
+                                    <% if (typeof notice_datas != "undefined" && notice_datas != null) { %>
+                                        <% i=0;
+                                        for(let notice_data of notice_datas) { %>    
+                                    
                                     <div class="notice-list">
-                                        <div class="post-date bg-skyblue">16 June, 2019</div>
-                                        <h6 class="notice-title"><a href="#">Great School manag mene esom text of the
-                                                printing.</a></h6>
+                                        <div class="post-date bg-skyblue"><%= helper.convertNoticeDate(notice_data.date) %></div>
+                                        <h6 class="notice-title"><a href="#"><%= notice_data.title %></a></h6>
                                         <div class="entry-meta"> Jennyfar Lopez / <span>5 min ago</span></div>
                                     </div>
+                                    <% } } %>
                                     <div class="notice-list">
                                         <div class="post-date bg-yellow">16 June, 2019</div>
                                         <h6 class="notice-title"><a href="#">Great School manag printing.</a></h6>
