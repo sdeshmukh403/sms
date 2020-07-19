@@ -2,16 +2,20 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-   return queryInterface.createTable(
-      'notifications',
+    return queryInterface.createTable(
+      'libraries',
       {
         id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
           autoIncrement: true
         },
-        title: Sequelize.STRING,
-        description: Sequelize.TEXT,
+        book_name: Sequelize.STRING,
+        subject: Sequelize.INTEGER,
+        writer: Sequelize.STRING,
+        class: Sequelize.INTEGER,
+        published: Sequelize.DATE,
+        creating_date: Sequelize.DATE,
         createdAt: {
           type: Sequelize.DATE
         },
@@ -23,7 +27,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-  return  queryInterface.dropAllTables()
+   return queryInterface.dropAllTables()
 
   }
 };

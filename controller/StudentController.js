@@ -165,8 +165,7 @@ exports.postStudentAdmissionForm =  [upload.single('photo'),(req, res) => {
     }).then(result=>{
       return res.json({msg:'Students deleted successfully.'}); 
     }).catch(err => {
-      return res.json({msg:'Students deleted successfully.'}); 
-
+      return res.json({msg:'Students deleted successfully.'});
    }); 
   }
 

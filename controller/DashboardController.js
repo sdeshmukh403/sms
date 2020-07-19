@@ -20,7 +20,7 @@ exports.getAdminDashboard = (req, res) =>{
                                     User.count({
                                         where:{role:2}
                                         }).then(function(teachers_count){
-                                            Notice.findAll({where: filterWhere,
+                                            Notice.findAll({
                                                 attributes:['title', 'description', 'created_by', 'createdAt'], order: [
                                                 ['id', 'DESC']
                                             ] , raw:true}).then(function (result) { 

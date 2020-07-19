@@ -10,6 +10,8 @@ let religionController = require('../controller/ReligionController');
 let classnameController = require('../controller/ClassnameController');
 let dashboardController = require('../controller/DashboardController');
 let noticeController = require('../controller/NoticeController');
+let libraryController = require('../controller/LibraryController');
+
 
 
 const fs = require('fs')
@@ -52,6 +54,14 @@ router.post('/parent-admission-form', parentController.postParentAdmissionForm);
 router.get('/edit-parent/:id', parentController.getEditParent);
 router.post('/update-parent', parentController.postUpdateParent);
 
+//library page
+router.get('/all-books/:subject?/:book_name?/:writer?', libraryController.getBookList);
+router.get('/book-admission-form', libraryController.getBookAdmissionForm);
+router.post('/book-admission-form', libraryController.postBookAdmissionForm);
+router.get('/edit-book/:id', libraryController.getEditBook);
+router.post('/update-book', libraryController.postUpdateBook); 
+router.get('/delete-book/:id', libraryController.deleteBook);
+router.post('/books-bulk-delete', libraryController.deleteBooks);
 //notice page
 router.get('/all-notices', noticeController.getNoticeList);
 router.post('/add-notice', noticeController.postAddNotice);

@@ -6,8 +6,7 @@ exports.getSubjectList = (req, res) =>{
       });    
 } 
 
- exports.postAddSubject = (req, res) =>{ 
-  
+ exports.postAddSubject = (req, res) =>{   
     Subject.create({
       name:req.body.name,
       class:req.body.class,

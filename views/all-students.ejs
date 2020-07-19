@@ -75,21 +75,7 @@
                     
 <script>
 $('.deleteChecked').click(function(){
-    checkedStudents = [];
-    i = 0;
-    $(".checkOne:checked").each(function(){
-     checkedStudents[i++] = $(this).val();       
-    });
-    $.ajax({
-        type:'POST',
-        url:'/students-bulk-delete',
-        data:{checkedStudents},        
-        success:function(result){
-            html = '<div class="alert alert-success default" ><strong>Success!</strong> '+result.msg+'</div>'
-            $('.json-msg').html(html)
-          window.setTimeout(function(){location.reload()},3000)
-        }
-    })
+bulkDelete("/students-bulk-delete");
 });
-$('.addNew'). attr("href", '/student-admission-form');
+addNew('/student-admission-form');
 </script>

@@ -25,7 +25,10 @@ var func = {
     }},
     convertNoticeDate: (date) => {
     return dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT");
-    }
+    },
+    convertBookDate: (date) => {
+        return dateFormat(date, " mmmm dS, yyyy");
+     }
     
 }
 module.exports = func;

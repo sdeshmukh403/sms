@@ -41,6 +41,29 @@
                }
             });
                 } 
+
+function bulkDelete(url){
+    checkedData = [];
+    i = 0;
+    $(".checkOne:checked").each(function(){
+      checkedData[i++] = $(this).val();       
+    });
+    console.log(checkedData);
+    $.ajax({
+        type:'POST',
+        url:url,
+        data:{checkedData},        
+        success:function(result){
+            html = '<div class="alert alert-success default" ><strong>Success!</strong> '+result.msg+'</div>'
+            $('.json-msg').html(html)
+          window.setTimeout(function(){location.reload()},3000)
+        }
+    })
+
+}
+function addNew(url){
+$('.addNew'). attr("href", url);
+}
    </script>
    </body>
 

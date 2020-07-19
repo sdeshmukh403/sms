@@ -1,0 +1,76 @@
+<% include ../partials/header.html %>
+<% include ../partials/nav.html %>
+<% include ../partials/sidebar.html %>
+<% include ../partials/list-breadcum.html %>
+<% include ../partials/filter.html %>
+<% include ../partials/success.html %> 
+                        <div class="table-responsive">
+                            <table class="table display data-table text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th> 
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input checkAll">
+                                                <label class="form-check-label">ID</label>
+                                            </div>
+                                        </th>
+                                        <th>Book Name</th>
+                                        <th>Subject</th>
+                                        <th>Writter</th>
+                                        <th>Class</th>
+                                        <th>Published</th>
+                                        <th>Creating Date</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if (typeof datas != "undefined" && datas != null) { %>
+                                        <% i=0;
+                                        for(let data of datas) { %>
+                                    <tr>
+                                        <td>
+                                            <div class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    <span class="flaticon-more-button-of-three-dots"></span>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right">                                                                                       
+                                                    <a class="dropdown-item" href="delete-book/<%= data.id %>"><i
+                                                            class="fas fa-times text-orange-red"></i>Delete</a>
+                                                    <a class="dropdown-item" href="/edit-book/<%= data.id %>"><i
+                                                            class="fas fa-edit text-dark-pastel-green"></i>Edit</a>
+                                                     </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input checkOne" value="<%= data.id %>">
+                                                <label class="form-check-label">#0021</label>
+                                            </div>
+                                        </td>
+                                        <td><%= data.book_name %></td>
+                                        <td><%= data.subject %></td>
+                                        <td><%= data.writer %></td>
+                                        <td><%= data.class %></td>
+                                        <td><%= data.published %></td>
+                                        <td><%= helper.convertBookDate(data.creating_date ) %></td>
+                                     
+                                    </tr>
+                                    <% }
+                                } %>
+                               
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Teacher Table Area End Here -->
+                <% include ../partials/fadeout.html %>
+                <% include ../partials/footer.html %>
+<script>
+    $('.deleteChecked').click(function(){
+    bulkDelete("/books-bulk-delete");
+    });
+    addNew('/book-admission-form');
+</script>
