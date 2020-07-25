@@ -23,11 +23,11 @@ exports.checkLogined = (req, res, next) =>
  
  }
 
-  exports.getLogout = (req, res) =>{
-    localStorage.removeItem('userToken');
-    res.redirect('/login');
+exports.getLogout = (req, res) =>{
+  localStorage.removeItem('userToken');
+  res.redirect('/login');
 
-  }
+}
 
 exports.getDashboard = (req, res) =>{
   res.render('home');
@@ -38,13 +38,35 @@ exports.getLogin = (req, res) => {
 }
 
 exports.postLogin = (req, res) => {
-  User.findAll({  attributes:['password', 'id'], raw:true , where:[{username:req.body.username},{type:1}]}).then( result => {
-  if(bcrypt.compareSync(req.body.password, result[0].password )){
-    var token = jwt.sign({userId:result[0].id}, 'loginToken');
+  User.findOne({  attributes:['password', 'id', 'username', 'role', 'image'], raw:true , where:[{email:req.body.email}]}).then( result => {
+  if(bcrypt.compareSync(req.body.password, result.password )){
+    var token = jwt.sign({userId:result.id}, 'loginToken');
     localStorage.setItem('userToken', token)
-    localStorage.setItem('loginUser', req.body.username)
-    res.redirect('/');
-    res.send("you are loggin successfully"); 
+    localStorage.setItem('loginUser', result.username)
+    let profileimg = ''
+    let role = '';
+    switch(result.role){
+      case 1:
+        role = 1,
+        profileimg = 'uploads/admin/'+result.image
+      break  
+      case 2:
+        role = 2,
+        profileimg = 'uploads/teacher/'+result.image
+      break 
+      case 3:
+        role = 3,
+        profileimg = 'uploads/student/'+result.image
+      break 
+      case 4:
+        role= 4,
+        profileimg = 'uploads/parent/'+result.image
+      break 
+    }
+    localStorage.setItem('profileImg', profileimg)
+    localStorage.setItem('role', role)
+    res.redirect('/admin-dashboard');
+
    } 
   res.send("Credentials are invalid");
   });

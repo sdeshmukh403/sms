@@ -3,9 +3,7 @@ let Section  = require('../model/section');
 let Constant = require('../model/constant');
 let Religion   = require('../model/religion');
 let CommonController = require('./CommonController');
-let Common = require('../public/common');
 const multer = require('multer');
-
 
 exports.getStudentList = (req, res) =>{
   filterWhere ={role:Constant.STUDENT};
@@ -21,9 +19,15 @@ exports.getStudentList = (req, res) =>{
   raw:true, order: [
     ['id', 'DESC']
 ]}).then(function (students) {
-  res.render('all-students', {title: 'Student',active_path:active_path, helper:require('../public/helper'),
-  msg: req.flash('success-msg'),
-   main_heading:'All Students', sub_heading:'All student data', data: students });  
+  common_variables = [{role: localStorage.getItem('role'), 
+  profileimg : localStorage.getItem('profileImg' ),
+  username:localStorage.getItem('loginUser'),
+  Constant: require('../model/constant')
+}]
+data = { title: 'Student', active_path:active_path, helper:require('../public/helper'),
+msg: req.flash('success-msg'),main_heading:'All Students', 
+sub_heading:'All student data', data: students, common_variables }
+  res.render('all-students', data);  
      });
 }
 
@@ -83,7 +87,8 @@ exports.postStudentAdmissionForm =  [upload.single('photo'),(req, res) => {
         dob:date,
         role:'3',
         blood_grp:req.body.blood_grp,
-        image:image
+        image:image,
+        password:'$2a$10$OVZMhKy7dQSi4EA6vc13HOf766DvNTDDDzk5cLeMEBAoW/MtuoKAG'
       }).then(result=>{
         req.flash('success-msg', "Student added successfully")  ;
         req.flash('success-class', "success")  ;

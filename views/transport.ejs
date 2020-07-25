@@ -1,0 +1,154 @@
+<% include ../partials/header %>
+<% include ../partials/nav %>
+<% include ../partials/sidebar %>
+<% include ../partials/list-breadcum %>
+<% include ../partials/success %>          
+
+</div>
+
+                <div class="row">
+                    <!-- Add Transport Area Start Here -->
+                    <div class="col-4-xxxl col-12">
+                        <div class="card height-auto">
+                            <div class="card-body">
+                                <div class="heading-layout1">
+                                    <div class="item-title">
+                                        <h3>Add New Transport</h3>
+                                    </div>                                    
+                                </div>
+                                <form class="new-added-form" method="POST" action="<%= typeof data != 'undefined'? '/update-transport':'' %>">
+                                   <input type="hidden" name="id" value="<%= typeof data != 'undefined'? data.id:'' %>">
+                                    <div class="row">
+                                        <div class="col-12-xxxl col-xl-4 col-sm-6 col-12 form-group">
+                                            <label>Route Name</label>
+                                            <input type="text" placeholder="" name="route_name" class="form-control" value="<%= typeof data != 'undefined'? data.route_name:'' %>">
+                                        </div>
+                                        <div class="col-12-xxxl col-xl-4 col-sm-6 col-12 form-group">
+                                            <label>Vehicle Number</label>
+                                            <input type="text" placeholder="" name="vehicle_no" class="form-control" value="<%= typeof data != 'undefined'? data.vehicle_no:'' %>">
+                                        </div>
+                                        <div class="col-12-xxxl col-xl-4 col-sm-6 col-12 form-group">
+                                            <label>Driver Name</label>
+                                            <input type="text" placeholder="" name="driver_name" class="form-control" value="<%= typeof data != 'undefined'? data.driver_name:'' %>">
+                                        </div>
+                                        <div class="col-12-xxxl col-xl-4 col-sm-6 col-12 form-group">
+                                            <label>License Number</label>
+                                            <input type="text" placeholder="" name="liences_no" class="form-control" value="<%= typeof data != 'undefined'? data.liences_no:'' %>"> 
+                                        </div>
+                                        <div class="col-12-xxxl col-xl-4 col-sm-6 col-12 form-group">
+                                            <label>Phone Number</label>
+                                            <input type="text" placeholder="" name="phone_no" class="form-control" value="<%= typeof data!= 'undefined'? data.phone_no:'' %>">
+                                        </div>
+                                        <div class="col-12 form-group mg-t-8">
+                                            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark add-data">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Transport Area End Here -->
+                    <!-- All Transport List Area Start Here -->
+                    <div class="col-8-xxxl col-12">
+                        <div class="card height-auto">
+                            <div class="card-body">
+                                <div class="heading-layout1">
+                                    <div class="item-title">
+                                        <h3>All Transport Lists</h3>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                                            aria-expanded="false">...</a>
+
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item deleteChecked" href="#"><i
+                                                    class="fas fa-times text-orange-red"></i>Delete</a>
+                                            <a class="dropdown-item" href="#"><i
+                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <form class="mg-b-20">
+                                    <div class="row gutters-8">
+                                        <div class="col-lg-4 col-12 form-group">
+                                            <input type="text" name="route_name" placeholder="Search by Route ..." class="form-control">
+                                        </div>
+                                        <div class="col-lg-3 col-12 form-group">
+                                            <input type="text" name="vehicle_no" placeholder="Search by Car Number ..."
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-lg-3 col-12 form-group">
+                                            <input type="text" name="phone_no" placeholder="Search by Phone ..." class="form-control">
+                                        </div>
+                                        <div class="col-lg-2 col-12 form-group">
+                                            <button type="submit"
+                                                class="fw-btn-fill btn-gradient-yellow">SEARCH</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="table-responsive">
+                                    <table class="table display data-table text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input checkAll">
+                                                        <label class="form-check-label">Route Name</label>
+                                                    </div>
+                                                </th>
+                                                <th>Vehicle No</th>
+                                                <th>Driver Name</th>
+                                                <th>Driver License</th>
+                                                <th>Contact Number</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if (typeof datas != "undefined" && datas != null) { %>
+                                                <% i=0;
+                                                for(let data of datas) { %> 
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input checkOne" value="<%= data.id %>">
+                                                        <label class="form-check-label"><%= data.route_name %> </label>
+                                                    </div>
+                                                </td>
+                                                <td><%= data.vehicle_no %></td>
+                                                <td><%= data.driver_name %></td>
+                                                <td><%= data.liences_no %></td>
+                                                <td><%= data.phone_no %></td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                                            aria-expanded="false">
+                                                            <span class="flaticon-more-button-of-three-dots"></span>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/delete-transport/<%= data.id %>"><i
+                                                                    class="fas fa-times text-orange-red"></i>Delete</a>
+                                                            <a class="dropdown-item" href="/edit-transport/<%= data.id %>"><i
+                                                                    class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <% i++ } } %>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- All Transport List Area End Here -->
+                </div>
+                <!-- All Subjects Area End Here -->
+                <% include ../partials/fadeout %>
+                <% include ../partials/footer %>
+<script>
+    $('.deleteChecked').click(function(){
+    bulkDelete("/transports-bulk-delete");
+    });
+</script>

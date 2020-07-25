@@ -11,12 +11,22 @@ let classnameController = require('../controller/ClassnameController');
 let dashboardController = require('../controller/DashboardController');
 let noticeController = require('../controller/NoticeController');
 let libraryController = require('../controller/LibraryController');
+let transportController = require('../controller/TransportController');
+let authController = require('../controller/AuthController');
 
 
 
 const fs = require('fs')
 
 const path = require('path')
+
+// Auth
+router.all('*', authController.checkLogined);
+router.get('/login', authController.getLogin);
+router.post('/login', authController.postLogin);
+router.get('/logout', authController.getLogout);
+router.get('/signup', authController.getSignup);
+
 /* GET home page. */
 router.get('/', homeController.getDashboard);
 router.get('/test', function(req, res){
@@ -24,9 +34,12 @@ res.render('test');
 });
 router.get('/all-subjects', subjectController.getSubjectList);
 router.post('/add-subject', subjectController.postAddSubject);
-
+ 
 //Admin dashboard
 router.get('/admin-dashboard', dashboardController.getAdminDashboard);
+router.get('/student-dashboard', dashboardController.getStudentDashboard);
+router.get('/teacher-dashboard', dashboardController.getTeacherDashboard);
+router.get('/parent-dashboard', dashboardController.getParentDashboard);
 
 // student page
 router.get('/all-students/:roll_no?/:firstname?/:classname?', studentController.getStudentList);
@@ -65,6 +78,15 @@ router.post('/books-bulk-delete', libraryController.deleteBooks);
 //notice page
 router.get('/all-notices', noticeController.getNoticeList);
 router.post('/add-notice', noticeController.postAddNotice);
+
+//transport page
+router.get('/transport', transportController.getTransportList);
+router.post('/transport', transportController.postAddTransport);
+router.get('/delete-transport/:id', transportController.deleteTransport);
+router.post('/transports-bulk-delete', transportController.deleteTransports);
+router.get('/edit-transport/:id', transportController.editTransport);
+router.post('/update-transport/', transportController.updatetTransport);
+
 
 //section page
 router.get('/all-sections', sectionController.getSectionList);

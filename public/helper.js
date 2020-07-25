@@ -1,6 +1,7 @@
 let Constant = require('../model/constant');
 let User  = require('../model/user');
 var dateFormat = require('dateformat');
+var commonController = require('../controller/CommonController');
 
 var func = {
     gender_name: function(gender_id) {        
@@ -28,7 +29,6 @@ var func = {
     },
     convertBookDate: (date) => {
         return dateFormat(date, " mmmm dS, yyyy");
-     }
-    
+     }  
 }
 module.exports = func;
