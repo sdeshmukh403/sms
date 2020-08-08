@@ -8,6 +8,7 @@
                         <a href="index.html"><img src="img/logo1.png" alt="logo"></a>
                     </div>
                </div>
+               <% if(typeof common_variables != "undefined"){ %>
                 <div class="sidebar-menu-content">
                     <ul class="nav nav-sidebar-menu sidebar-toggle-view">
                         <li class="nav-item sidebar-nav-item">
@@ -43,11 +44,7 @@
                                 <li class="nav-item">
                                     <a href="/all-students" class="nav-link"><i class="fas fa-angle-right"></i>All
                                         Students</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/student-details.html" class="nav-link"><i
-                                            class="fas fa-angle-right"></i>Student Details</a>
-                                </li>
+                                </li>                        
                                 <li class="nav-item">
                                     <a href="/student-admission-form" class="nav-link"><i
                                             class="fas fa-angle-right"></i>Admission Form</a>
@@ -67,11 +64,7 @@
                                         Teachers</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/app.js" class="nav-link"><i
-                                            class="fas fa-angle-right"></i>Teacher Details</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="add-teacher.html" class="nav-link"><i class="fas fa-angle-right"></i>Add
+                                    <a href="/teacher-admission-form" class="nav-link"><i class="fas fa-angle-right"></i>Add
                                         Teacher</a>
                                 </li>
                                 <li class="nav-item">
@@ -86,13 +79,9 @@
                                 <li class="nav-item">
                                     <a href="all-parents" class="nav-link"><i class="fas fa-angle-right"></i>All
                                         Parents</a>
-                                </li>
+                            </li>
                                 <li class="nav-item">
-                                    <a href="parents-details.html" class="nav-link"><i
-                                            class="fas fa-angle-right"></i>Parents Details</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="add-parents.html" class="nav-link"><i class="fas fa-angle-right"></i>Add
+                                    <a href="/parent-admission-form" class="nav-link"><i class="fas fa-angle-right"></i>Add
                                         Parent</a>
                                 </li>
                             </ul>
@@ -232,6 +221,7 @@
                         <% } %>
                     </ul>
                 </div>
+                <% } %>
             </div>
             <!-- Sidebar Area End Here -->
             

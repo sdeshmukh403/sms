@@ -26,9 +26,17 @@ router.get('/login', authController.getLogin);
 router.post('/login', authController.postLogin);
 router.get('/logout', authController.getLogout);
 router.get('/signup', authController.getSignup);
+router.get('/forget-password', authController.getForgetPassword);
+router.post('/forget-password', authController.postForgetPassword);
+router.get('/forget-password', authController.getForgetPassword);
+router.get('/reset-password', authController.getResetPassword);
+router.post('/reset-password', authController.postResetPassword);
+router.get('/account-settings', authController.getAccountSettings);
+router.get('/profile', authController.getProfile);
+
 
 /* GET home page. */
-router.get('/', homeController.getDashboard);
+router.get('/', authController.checkRole);
 router.get('/test', function(req, res){
 res.render('test');
 });

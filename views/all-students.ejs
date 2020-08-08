@@ -55,9 +55,9 @@
                                         <td class="text-center"><img src="uploads/student/<%= student.image %>" alt="student"></td>
                                         <td><%= student.firstname + " " + student.lastname %></td>
                                         <td><%= helper.gender_name(student.gender) %></td>
-                                        <td><%= student.class %></td>
-                                        <td><%= student.section_id %></td>
-                                        <td><%= student.parent_id %></td>
+                                        <td><%= (typeof student['classname.id'] != "undefined" && student['classname.id'] != null)? student['classname.name']:"-" %></td>
+                                        <td><%= student['section.name'] %></td>
+                                        <td><%= (typeof student['parent.id'] != "undefined" && student['parent.id'] != null)? student['parent.firstname']+" "+student['parent.lastname']:"-" %></td>
                                         <td><%= helper.convertDate(student.dob) %></td>
                                         <td><%= student.phone %></td>
                                         <td><%= student.email %></td>                                        

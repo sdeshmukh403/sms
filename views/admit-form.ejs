@@ -3,111 +3,123 @@
 <% include ../partials/sidebar %>
 <% include ../partials/list-breadcum %>
 </div>
-                        <form class="new-added-form" action="student-admission-form" method="POST" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>First Name *</label>
-                                    <input type="text" placeholder="" name="firstname" class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Last Name *</label>
-                                    <input type="text" placeholder="" name="lastname" class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Gender *</label>
-                                    <select class="select2" name="gender">
-                                        <option value="">Please Select Gender *</option>
-                                        <option value="M">Male</option>
-                                        <option value="F">Female</option>
-                                        <option value="O">Others</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Date Of Birth *</label>
-                                    <input type="text" placeholder="dd/mm/yyyy" name="dob" class="form-control air-datepicker"
-                                        data-position='bottom right'>
-                                    <i class="far fa-calendar-alt"></i>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Roll</label>
-                                    <input type="text" name="roll_no" placeholder="" class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Blood Group *</label>
-                                    <select class="select2" name="blood_grp">
-                                        <option value="">Please Select Group *</option>
-                                        <option value="A+">A+</option>
-                                        <option value="A-">A-</option>
-                                        <option value="B+">B+</option>
-                                        <option value="B-">B-</option>
-                                        <option value="O+">O+</option>
-                                        <option value="O-">O-</option>
-                                        <option value="AB+">AB+</option>
-                                        <option value="AB-">AB-</option>
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Religion *</label>
-                                    <select class="select2" name="religion">
-                                        <option value="">Please Select Religion *</option>
-                                        <% if (typeof religions != "undefined" && religions != null) { %>
-                                            <% for(let religion of religions) { %> 
-                                                <option value="<%= religion.id %>"><%= religion.name %></option>   
-                                                <% }
-                                            } %> 
-                                        
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>E-Mail</label>
-                                    <input type="email" name="email" placeholder="" class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Class *</label>
-                                    <select class="select2" name="class">
-                                        <option value="">Please Select Class *</option>
-                                        <% if (typeof classnames != "undefined" && classnames != null) { %>
-                                            <% for(let classname of classnames) { %> 
-                                        <option value="<%= classname.id %>"><%= classname.name %></option>
-                                        <% }
-                                    } %> 
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Section *</label>
-                                    <select class="select2" name="section_id">
-                                        <option value="">Please Select Section *</option>
-                                        <% if (typeof sections != "undefined" && sections != null) { %>
-                                            <% for(let section of sections) { %> 
-                                                <option value="<%= section.id %>"><%= section.name %></option>   
-                                                <% }
-                                            } %> 
-                                        
-                                    </select>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Admission ID</label>
-                                    <input type="text" placeholder="" name='admission_id' class="form-control">
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
-                                    <label>Phone</label>
-                                    <input type="text" placeholder="" name="phone" class="form-control">
-                                </div>
-                                <div class="col-lg-6 col-12 form-group">
-                                    <label>Short BIO</label>
-                                    <textarea class="textarea form-control" name="description" id="form-message" cols="10"
-                                        rows="9"></textarea>
-                                </div>
-                                <div class="col-lg-6 col-12 form-group mg-t-30">
-                                    <label class="text-dark-medium">Upload Student Photo (150px X 150px)</label>
-                                    <input type="file" class="form-control-file" name="photo">
-                                </div>
-                                <div class="col-12 form-group mg-t-8">
-                                    <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
-                                    <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <% include ../partials/footer %>
+
+<form class="new-added-form" id="myform" action="student-admission-form" method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>First Name *</label>
+            <input type="text" placeholder="" name="firstname" id="firstname" class="form-control">
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Last Name *</label>
+            <input type="text" placeholder="" name="lastname" id="lastname" class="form-control">
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Gender *</label>
+            <select class="select2" name="gender">
+                <option value="">Please Select Gender *</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Others</option>
+            </select>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Date Of Birth *</label>
+            <input type="text" placeholder="dd/mm/yyyy" name="dob" class="form-control air-datepicker"
+                data-position='bottom right'>
+            <i class="far fa-calendar-alt"></i>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Roll</label>
+            <input type="text" name="roll_no" placeholder="" class="form-control">
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Blood Group *</label>
+            <select class="select2" name="blood_grp">
+                <option value="">Please Select Group *</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Religion *</label>
+            <select class="select2" name="religion">
+                <option value="">Please Select Religion *</option>
+                <% if (typeof religions != "undefined" && religions != null) { %>
+                <% for(let religion of religions) { %>
+                <option value="<%= religion.id %>"><%= religion.name %></option>
+                <% }
+                                            } %>
+
+            </select>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>E-Mail</label>
+            <input type="email" name="email" id="email" placeholder="" class="form-control">
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Class *</label>
+            <select class="select2" name="class">
+                <option value="">Please Select Class *</option>
+                <% if (typeof classnames != "undefined" && classnames != null) { %>
+                <% for(let classname of classnames) { %>
+                <option value="<%= classname.id %>"><%= classname.name %></option>
+                <% }
+                                    } %>
+            </select>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Section *</label>
+            <select class="select2" name="section_id">
+                <option value="">Please Select Section *</option>
+                <% if (typeof sections != "undefined" && sections != null) { %>
+                <% for(let section of sections) { %>
+                <option value="<%= section.id %>"><%= section.name %></option>
+                <% }
+                                            } %>
+
+            </select>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Admission ID</label>
+            <input type="text" placeholder="" name='admission_id' class="form-control">
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Phone</label>
+            <input type="text" placeholder="" name="phone" id="phone" class="form-control">
+        </div>
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Parent *</label>
+            <select class="select2" name="parent_id">
+                <option value="">Please Select Parent *</option>
+                <% if (typeof parents != "undefined" && parents != null) { %>
+                <% for(let parent of parents) { %>
+                <option value="<%= parent.id %>"><%= parent.firstname+" "+parent.lastname %></option>
+                <% }
+                   } %>
+            </select>
+        </div>
+        <div class="col-lg-6 col-12 form-group">
+            <label>Short BIO</label>
+            <textarea class="textarea form-control" name="description" id="form-message" cols="10" rows="9"></textarea>
+        </div>
+        <div class="col-lg-6 col-12 form-group mg-t-30">
+            <label class="text-dark-medium ">Upload Student Photo (150px X 150px)</label>
+            <br>
+            <input type="file" class="form-control-file" name="photo">
+        </div>
+        <div class="col-12 form-group mg-t-8">
+            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+            <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+<% include ../partials/footer %>

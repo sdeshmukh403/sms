@@ -29,6 +29,29 @@ var func = {
     },
     convertBookDate: (date) => {
         return dateFormat(date, " mmmm dS, yyyy");
-     }  
+     },
+    convertProfileDate: (date) => {
+    return dateFormat(date, " dd.mm.yyyy");
+    },   
+    getRoleName : function(role_id){
+        switch(role_id){
+            case Constant.ADMIN:
+                role_name="Admin";
+                break;
+            case Constant.TEACHER:
+                role_name="Teacher";
+                break;   
+            case Constant.STUDENT:
+                role_name="Student";
+                break; 
+            case Constant.PARENT:
+                role_name="Parent";
+                break;          
+            default:
+                role_name="-";
+        }
+        return role_name;
+
+    }
 }
 module.exports = func;

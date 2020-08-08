@@ -31,4 +31,8 @@ var test = sequelize.authenticate()
 //     class: 1
 // }).save();
 
+
+
+
+
 module.exports = sequelize;     

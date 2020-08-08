@@ -1,0 +1,102 @@
+<% include ../partials/header %>
+<% include ../partials/nav %>
+<% include ../partials/sidebar %>
+<% include ../partials/list-breadcum %>
+</div>
+
+<div class="col-8-xxxl col-xl-7">
+    <div class="card account-settings-box">
+        <div class="card-body">
+            <div class="heading-layout1 mg-b-20">
+                <div class="item-title">
+                    <h3>User Details</h3>
+                </div>
+               <div class="dropdown">
+                    <a class="dropdown-toggle" href="#" role="button" 
+                    data-toggle="dropdown" aria-expanded="false">...</a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="#"><i class="fas fa-times text-orange-red"></i>Close</a>
+                        <a class="dropdown-item" href="/edit-student/<%= data.id %>"><i class="fas fa-cogs text-dark-pastel-green"></i>Edit</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-redo-alt text-orange-peel"></i>Refresh</a>
+                    </div>
+                </div>
+            </div>
+            <div class="user-details-box">
+                <div class="item-img">
+                    <img src='<%= typeof common_variables != "undefined"? common_variables[0].profileimg:"" %>' alt="user">
+                </div>
+                <div class="item-content">
+                    <div class="info-table table-responsive">
+                        <table class="table text-nowrap">
+                            <tbody>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td class="font-medium text-dark-medium"><%= data.firstname+ " " +data.lastname %></td>
+                                </tr>
+                                <tr>
+                                    <td>User Type:</td>
+                                    <td class="font-medium text-dark-medium"><%= helper.getRoleName(data.role) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Gender:</td>
+                                    <td class="font-medium text-dark-medium"><%= helper.gender_name(data.gender) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Father Name:</td>
+                                    <td class="font-medium text-dark-medium">Steve Jones</td>
+                                </tr>
+                                <tr>
+                                    <td>Mother Name:</td>
+                                    <td class="font-medium text-dark-medium">Naomi Rose</td>
+                                </tr>
+                                <tr>
+                                    <td>Date Of Birth:</td>
+                                    <td class="font-medium text-dark-medium"><%= helper.convertProfileDate(data.dob) %></td>
+                                </tr>
+                                <tr>
+                                    <td>Religion:</td>
+                                    <td class="font-medium text-dark-medium"><%= data.religion %></td>
+                                </tr>
+                                <tr>
+                                    <td>Joining Date:</td>
+                                    <td class="font-medium text-dark-medium">07.08.2016</td>
+                                </tr>
+                                <tr>
+                                    <td>E-mail:</td>
+                                    <td class="font-medium text-dark-medium"><%= data.email %></td>
+                                </tr>
+                                <tr>
+                                    <td>Subject:</td>
+                                    <td class="font-medium text-dark-medium">English</td>
+                                </tr>
+                                <tr>
+                                    <td>Class:</td>
+                                    <td class="font-medium text-dark-medium"><%= data.class %></td>
+                                </tr>
+                                <tr>
+                                    <td>Section:</td>
+                                    <td class="font-medium text-dark-medium"><%= data.section_id %></td>
+                                </tr>
+                                <tr>
+                                    <td>ID No:</td>
+                                    <td class="font-medium text-dark-medium">10005</td>
+                                </tr>
+                                <tr>
+                                    <td>Address:</td>
+                                    <td class="font-medium text-dark-medium"><%= data.address %></td>
+                                </tr>
+                                <tr>
+                                    <td>Phone:</td>
+                                    <td class="font-medium text-dark-medium"><%= data.phone %></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>

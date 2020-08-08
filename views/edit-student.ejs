@@ -14,7 +14,7 @@
                                     <label>Last Name *</label>
                                     <input type="text" placeholder="" name="lastname" class="form-control" value="<%= student.lastname %>">
                                 </div>
-                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">   
                                     <label>Gender *</label>
                                     <select class="select2" name="gender" >
                                         <option value="">Please Select Gender *</option>
@@ -93,6 +93,17 @@
                                 <div class="col-xl-3 col-lg-6 col-12 form-group">
                                     <label>Phone</label>
                                     <input type="text" placeholder="" name="phone" class="form-control" value="<%= student.phone %>">
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-12 form-group">
+                                    <label>Parent *</label>
+                                    <select class="select2" name="parent_id">
+                                        <option value="">Please Select Parent *</option>
+                                        <% if (typeof parents != "undefined" && parents != null) { %>
+                                        <% for(let parent of parents) { %>
+                                        <option value="<%= parent.id %>"  <%= student.parent_id ==  parent.id  ? 'selected' : '' %>><%= parent.firstname+" "+parent.lastname %></option>
+                                        <% }
+                                           } %>
+                                    </select>
                                 </div>
                                 <div class="col-lg-6 col-12 form-group">
                                     <label>Short BIO</label>

@@ -51,7 +51,7 @@ exports.getStudentDashboard = (req, res) =>{
     username:localStorage.getItem('loginUser'), 
     Constant: require('../model/constant')
   }]
-  data = {title:'Student Dashboard',helper:require('../public/helper'), main_heading:'Student Dashboard', 
+  data = {title:'Student Dashboard', helper:require('../public/helper'), main_heading:'Student Dashboard', 
    common_variables
   }
     res.render('student-dashboard', data);

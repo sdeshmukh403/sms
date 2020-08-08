@@ -1,0 +1,34 @@
+<% include ../partials/header %>
+<% include ../partials/nav %>
+<% include ../partials/sidebar %>
+<% include ../partials/list-breadcum %>
+</div>
+
+<form class="new-added-form " action="parent-admission-form" method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Old Password *</label>
+            <input type="text" placeholder="" name="old_password" class="form-control">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>New Password *</label>
+            <input type="text" placeholder="" name="new_password" class="form-control">
+        </div>  
+    </div>     
+    <div class="row">
+        <div class="col-xl-3 col-lg-6 col-12 form-group">
+            <label>Confirm Password</label>
+            <input type="text" placeholder="" name="cnfm_password" class="form-control">
+        </div>
+      
+        <div class="col-12 form-group mg-t-8">
+            <button type="submit" class="btn-fill-lg btn-gradient-yellow btn-hover-bluedark">Save</button>
+            <button type="reset" class="btn-fill-lg bg-blue-dark btn-hover-yellow">Reset</button>
+        </div>
+    </div>
+</form>
+</div>
+</div>
+<% include ../partials/footer %>

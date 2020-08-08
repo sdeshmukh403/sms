@@ -5,7 +5,7 @@ var Notice = sequelize.define('transports', {
     vehicle_no: Sequelize.STRING,
     driver_name: Sequelize.STRING,
     liences_no: Sequelize.STRING,
-    phone_no: Sequelize.STRING,
+    phone_no: Sequelize.STRING
     
 });
 module.exports = Notice;

@@ -3,5 +3,11 @@
     <div class="alert alert-success" >
         <strong>Success!</strong> <%= msg %>
       </div>
-    <% } %>
+<% } %>
     <span class="json-msg"></span>
+<% if (typeof err_msg != "undefined" && err_msg != null && err_msg != '') { %>
+  <div class="alert alert-danger" >
+    <strong>!</strong> <%= err_msg %>
+  </div>
+<% } %>
+    

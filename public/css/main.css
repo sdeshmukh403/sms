@@ -285,3 +285,6 @@ textarea {
         page-break-after: avoid;
     }
 }
+.form-control-file{
+    border: none;
+  }

@@ -5,6 +5,16 @@ const multer = require('multer');
 let Religion   = require('../model/religion');
 let CommonController = require('./CommonController');
 let Section  = require('../model/section');
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
+
+common_variables = [{role: localStorage.getItem('role'), 
+profileimg : localStorage.getItem('profileImg' ),
+username:localStorage.getItem('loginUser'),
+Constant: require('../model/constant')
+}]
 
 exports.getParentList = (req, res) =>{
     User.findAll({where:{role:Constant.PARENT},
@@ -40,8 +50,11 @@ exports.getParentDetail = (req, res) =>{
    raw:true}).then(function (result) { 
       res.render('parent-details', {title: 'Parent',
       msg: req.flash('success-msg'), 
-      main_heading:'View parent detail',list_heading:'All Parents',
-      list_url: '/all-parents', sub_heading:'View parent detail',  helper:require('../public/helper'),
+      main_heading:'View parent detail',
+      list_heading:'All Parents',
+      list_url: '/all-parents',
+      sub_heading:'View parent detail', 
+      helper:require('../public/helper'),
       data: result[0] });  
    });
 }
@@ -59,11 +72,15 @@ exports.getParentAdmissionForm = (req, res) => {
                 sub_heading:'Add New Parent',
                 sections:sections,
                 religions:religions,
-                classnames:classnames
+                classnames:classnames,
+                helper:require('../public/helper'),
+                common_variables
               }
 
     res.render('add-parent',  data );
-  });    
+  }).catch(err => {
+    return res.json({ msg: "Something went wrong",  success:false });
+});    
 });
   });
   }

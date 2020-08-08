@@ -26,10 +26,17 @@
     <link rel="stylesheet" href="css/animate.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+
     <!-- Modernize js -->
     <script src="js/modernizr-3.6.0.min.js"></script>
+    <style>
+        .error {
+            min-width: 100%;
+        }
+      
+    </style>
 </head>
-
 <body>
     <!-- Preloader Start Here -->
     <div id="preloader"></div>
@@ -41,10 +48,12 @@
                 <div class="item-logo">
                     <img src="img/logo2.png" alt="logo">
                 </div>
-                <form action="" class="login-form" method="POST">
-                    <div class="form-group">
+                <% include ../partials/success %>          
+                
+                <form id="myform" action="" class="login-form" method="POST">
+                    <div class="form-group email ">
                         <label>Email</label>
-                        <input type="text" placeholder="Enter email" name="email" class="form-control">
+                        <input type="text" placeholder="Enter email" name="email" class="form-control" >
                         <i class="far fa-envelope"></i>
                     </div>
                     <div class="form-group">
@@ -52,12 +61,13 @@
                         <input type="password" placeholder="Enter password" name="password" class="form-control">
                         <i class="fas fa-lock"></i>
                     </div>
+                    <br>
                     <div class="form-group d-flex align-items-center justify-content-between">
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="remember-me">
+                            <!-- <input type="checkbox" class="form-check-input" id="remember-me"> -->
                             <label for="remember-me" class="form-check-label">Remember Me</label>
                         </div>
-                        <a href="#" class="forgot-btn">Forgot Password?</a>
+                        <a href="/forget-password" class="forgot-btn">Forgot Password?</a>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="login-btn">Login</button>
@@ -76,6 +86,7 @@
             <div class="sign-up">Don't have an account ? <a href="#">Signup now!</a></div>
         </div>
     </div>
+    
     <!-- Login Page End Here -->
     <!-- jquery-->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -89,8 +100,48 @@
     <script src="js/jquery.scrollUp.min.js"></script>
     <!-- Custom Js -->
     <script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+<script>
+    // just for the demos, avoids form submit
+//     $(function() {
+
+//     jQuery.validator.setDefaults({
+//       debug: true,
+//       success: "valid"
+//     });
+//     $( "#myform" ).validate({      
+
+//       rules: {
+//         email: {
+//           required: true,
+//           email:true
+//         },
+//         password: {
+//           required: true,
+//           pwcheck: true,
+//           minlength: 8
+//         }   
+//       },   messages: {
+//         password: {
+//             required: "This field is required",
+//             pwcheck: "Add valid password "
+//                 }},
+//         submitHandler: function(form) {
+//         form.submit();
+//   }  
+//     });
+//     $.validator.addMethod("pwcheck",
+//                         function(value, element) {
+//       return  /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
+//        && /[a-z]/.test(value) // has a lowercase letter
+//        && /\d/.test(value) // has a digit;
+//                     });
+//                 });
+    </script>
 
 </body>
+<% include ../partials/fadeout %>
 
 
 <!-- Mirrored from www.radiustheme.com/demo/html/psdboss/akkhor/akkhor/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Jun 2020 08:06:07 GMT -->

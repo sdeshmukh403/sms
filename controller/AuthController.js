@@ -1,14 +1,31 @@
 let User = require('../model/user');
 let bcrypt = require('bcryptjs'); 
 var jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+let Constant = require('../model/constant');
+
+let transport = nodemailer.createTransport({  host: "smtp.mailtrap.io",
+port: 2525,
+auth: {
+  user: "32980c66fec375",
+  pass: "f67d40f18a6a79"
+}})
+
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
   localStorage = new LocalStorage('./scratch');
 }
+
+common_variables = [{role: localStorage.getItem('role'), 
+profileimg : localStorage.getItem('profileImg' ),
+username:localStorage.getItem('loginUser'),
+Constant: require('../model/constant')
+}]
+
 exports.checkLogined = (req, res, next) =>
 {
-    if (req.url === '/signup' || req.url === '/login') 
+    if (req.url === '/signup' || req.url === '/login' || req.url === '/forget-password'|| req.url === '/reset-password')  
     {
       if(localStorage.getItem('userToken') ){
         res.redirect('/')
@@ -34,15 +51,20 @@ exports.getDashboard = (req, res) =>{
 }
 
 exports.getLogin = (req, res) => {
-  res.render('login', {title:'Login'})
+  res.render('login', {title:'Login', err_msg: req.flash('err-msg')})
 }
 
 exports.postLogin = (req, res) => {
-  User.findOne({  attributes:['password', 'id', 'username', 'role', 'image'], raw:true , where:[{email:req.body.email}]}).then( result => {
-  if(bcrypt.compareSync(req.body.password, result.password )){
+  
+  User.findOne({  attributes:['password', 'id', 'username', 'role', 'image'], raw:true ,
+   where:[{email:req.body.email}]}).then( result => {
+     console.log(req.body.password);
+   if(result && bcrypt.compareSync(req.body.password, result.password )){
     var token = jwt.sign({userId:result.id}, 'loginToken');
     localStorage.setItem('userToken', token)
     localStorage.setItem('loginUser', result.username)
+    localStorage.setItem('UserId', result.id)
+
     let profileimg = ''
     let role = '';
     switch(result.role){
@@ -66,9 +88,9 @@ exports.postLogin = (req, res) => {
     localStorage.setItem('profileImg', profileimg)
     localStorage.setItem('role', role)
     res.redirect('/admin-dashboard');
-
    } 
-  res.send("Credentials are invalid");
+   req.flash('err-msg', "Credentials are invalid");
+   res.redirect('/login');
   });
 }
 
@@ -143,4 +165,83 @@ exports.postSignup = (req, res, next) => {
   return res.render('signup', {title:'Password Management system', errs:err.errors });
  // return res.send(err.errors);
  }); 
+}
+
+
+exports.getForgetPassword = (req, res) => {
+  res.render('forget_password', {title:'Send Link', errs:''});
+  }
+
+  exports.postForgetPassword = (req, res) => {  
+  const message = {
+    from: 'elonmusk@tesla.com', // Sender address
+    to: req.body.email,         // List of recipients
+    subject: 'Reset your password', // Subject line
+    html: "<a href='http://localhost:3000/reset-password'>link </a>" // Plain text body
+};
+transport.sendMail(message, function(err, info) {
+ 
+});
+localStorage.setItem('email_for_reset', req.body.email)
+res.send("Link has been sent to your email please check")
+}
+
+exports.getResetPassword = (req, res) => {
+  res.render('reset_password', {title:'Reset Password', errs:''});
+  }
+
+exports.postResetPassword = (req, res) => {
+let email = localStorage.getItem('email_for_reset')
+  User.update({
+    password:bcrypt.hashSync(req.body.cnfm_password, 10)},
+     { where:{email:email}}).then(result=>{
+    return res.redirect('/login'); 
+      })
+      localStorage.removeItem('email_for_reset');   
+  }
+
+  exports.getAccountSettings = (req, res) => {
+
+  data = {title:'Account Settings',helper:require('../public/helper'), main_heading:'Account Settings', 
+  common_variables
+ }
+    res.render('account-settings', data);
+
+  }
+
+  exports.getProfile = (req, res) => {   
+   User.findOne({where:{id:localStorage.getItem('UserId')},
+    attributes: ['id', 'firstname', 'image', 'lastname',
+    'roll_no', 'gender', 'section_id','address', 'dob', 'phone', 'email', 'class','role','religion'],
+    raw:true}).then(function (result) {
+      console.log(result);
+      data = {title:'Profile',helper:require('../public/helper'), main_heading:'Profile', 
+      common_variables, data:result
+     }
+      res.render('profile', data);                              
+   })
+ }
+
+ exports.checkRole = (req, res) =>{
+  var url= '';
+  switch(Number(localStorage.getItem('role'))){
+    case Constant.ADMIN:
+    var  url = '/admin-dashboard'
+    break  
+
+    case Constant.TEACHER:
+      url = '/teacher-dashboard'
+    break 
+
+    case Constant.STUDENT:
+      url = '/student-dashboard'
+    break 
+
+    case Constant.PARENT:
+      url = '/parent-dashboard'
+    break 
+  }
+  console.log(url)
+  res.redirect(url);
+
 }

@@ -3,7 +3,3 @@ var express = require('express');
 exports.getClassnameData = () => {
     return Classname.findAll({attributes:['id', 'name'] ,raw:true});  
 }
-
-function go(){
-    return "sdfds";
-}

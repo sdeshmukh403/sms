@@ -5,6 +5,16 @@ const multer = require('multer');
 let Religion   = require('../model/religion');
 let CommonController = require('./CommonController');
 let Section  = require('../model/section');
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
+
+common_variables = [{role: localStorage.getItem('role'), 
+profileimg : localStorage.getItem('profileImg' ),
+username:localStorage.getItem('loginUser'),
+Constant: require('../model/constant')
+}]
 
 
 exports.getTeacherList = (req, res) =>{
@@ -29,8 +39,14 @@ exports.getTeacherList = (req, res) =>{
 //view
 exports.getTeacherDetail = (req, res) =>{ 
   User.findAll({where:{id:req.params.id}, attributes: ['id', 'firstname', 'image', 'lastname','roll_no', 'gender', 'section_id','address', 'dob', 'phone', 'email', 'class'], raw:true}).then(function (result) { 
-      res.render('teacher-details', {title: 'Teacher', main_heading:'View teacher detail',list_heading:'All Teachers',
-      list_url: '/all-teachers', sub_heading:'View teacher detail', data: result[0] });  
+      res.render('teacher-details', {title: 'Teacher',
+     main_heading:'View teacher detail',
+     list_heading:'All Teachers',
+     list_url: '/all-teachers',
+     sub_heading:'View teacher detail',
+     common_variables,
+     helper:require('../public/helper'), 
+     data: result[0] });  
    });
 }
 
@@ -47,7 +63,9 @@ exports.getTeacherAdmissionForm = (req, res) => {
                 sub_heading:'Add New Teacher',
                 sections:sections,
                 religions:religions,
-                classnames:classnames
+                classnames:classnames,
+                common_variables,
+                helper:require('../public/helper'), 
               }
 
     res.render('teacher-admit-form',  data );

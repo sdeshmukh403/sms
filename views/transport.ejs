@@ -16,7 +16,7 @@
                                         <h3>Add New Transport</h3>
                                     </div>                                    
                                 </div>
-                                <form class="new-added-form" method="POST" action="<%= typeof data != 'undefined'? '/update-transport':'' %>">
+                                <form class="new-added-form" method="POST" id="myform" action="<%= typeof data != 'undefined'? '/update-transport':'' %>">
                                    <input type="hidden" name="id" value="<%= typeof data != 'undefined'? data.id:'' %>">
                                     <div class="row">
                                         <div class="col-12-xxxl col-xl-4 col-sm-6 col-12 form-group">

@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../database/sequelize_connection');
-
+let Section  = require('../model/section');
+let ClassName  = require('../model/classname');
 var User = sequelize.define('users', {
     firstname:{
         type: Sequelize.STRING
@@ -67,8 +68,20 @@ var User = sequelize.define('users', {
     },
     father_occupation:{
         type:Sequelize.STRING
+    },
+    parent_id:{
+        type:Sequelize.INTEGER
     }
  } );
 
+ User.belongsTo(Section,{foreignKey: 'section_id', sourceKey: 'id'});
+ Section.hasOne(User,{foreignKey: 'section_id', targetKey: 'id'}); 
+ 
+ User.belongsTo(ClassName,{as:'classname', foreignKey: 'class', sourceKey: 'id'});
+ ClassName.hasOne(User,{foreignKey: 'class', targetKey: 'id'});
+
+ User.belongsTo(User,{as: 'parent' , foreignKey: 'parent_id', sourceKey: 'id'});
+ User.hasOne(User,{foreignKey: 'parent_id', targetKey: 'id'});
+ 
 
 module.exports = User;

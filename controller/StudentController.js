@@ -1,11 +1,24 @@
 let User     = require('../model/user');
 let Section  = require('../model/section');
 let Constant = require('../model/constant');
-let Religion   = require('../model/religion');
+let Religion = require('../model/religion');
+let Classname   = require('../model/classname');
 let CommonController = require('./CommonController');
 const multer = require('multer');
+const ClassName = require('../model/classname');
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
+
+common_variables = [{role: localStorage.getItem('role'), 
+profileimg : localStorage.getItem('profileImg' ),
+username:localStorage.getItem('loginUser'),
+Constant: require('../model/constant')
+}]
 
 exports.getStudentList = (req, res) =>{
+
   filterWhere ={role:Constant.STUDENT};
   if(req.query.roll_no||req.query.firstname||req.query.classname){
     if(req.query.roll_no) filterWhere.roll_no =req.query.roll_no;
@@ -14,19 +27,29 @@ exports.getStudentList = (req, res) =>{
   }
   active_path = req.path.split('/')[1]
 
-  User.findAll({where: filterWhere, 
-    attributes:['id', 'image', 'firstname','lastname', 'roll_no', 'gender', 'section_id','address', 'dob', 'phone', 'email', 'class'] , 
+  User.findAll({where: filterWhere,    
   raw:true, order: [
     ['id', 'DESC']
-]}).then(function (students) {
-  common_variables = [{role: localStorage.getItem('role'), 
-  profileimg : localStorage.getItem('profileImg' ),
-  username:localStorage.getItem('loginUser'),
-  Constant: require('../model/constant')
-}]
-data = { title: 'Student', active_path:active_path, helper:require('../public/helper'),
-msg: req.flash('success-msg'),main_heading:'All Students', 
-sub_heading:'All student data', data: students, common_variables }
+], include: [{
+  model: Section,
+  required: true
+ },{
+  model: User ,
+  as: 'parent',
+  required: false
+ },{
+  model: ClassName ,
+  as: 'classname',
+  required: false
+ }]}).then(function (students) {
+data = { title: 'Student', 
+active_path:active_path,
+helper:require('../public/helper'),
+msg: req.flash('success-msg'),
+main_heading:'All Students', 
+sub_heading:'All student data',
+ data: students, 
+ common_variables }
   res.render('all-students', data);  
      });
 }
@@ -40,8 +63,9 @@ exports.getStudentDetail = (req, res) =>{
 
 exports.getStudentAdmissionForm = (req, res) => {
   Religion.findAll({attributes:['id', 'name'] ,raw:true}).then(function (religions) {
-  Section.findAll({attributes:['id', 'name'] ,raw:true}).then(function (sections) {
+  Section.findAll({attributes:['id', 'name'], raw:true}).then(function (sections) {
     CommonController.getClassnameData().then(function (classnames) {
+      User.findAll({where:{role:Constant.PARENT}, raw:true}).then(function (parents) {
       data = {  title: 'Student',  
                 list_heading:'All Students',
                 list_url: '/all-students',
@@ -49,13 +73,18 @@ exports.getStudentAdmissionForm = (req, res) => {
                 sub_heading:'Add New Student',
                 sections:sections,
                 religions:religions,
-                classnames:classnames
+                classnames:classnames,
+                parents:parents,
+                common_variables,
+                 helper:require('../public/helper') 
               }
 
     res.render('admit-form',  data );
   });    
 });
   });
+});
+
   }
 
   var storage = multer.diskStorage(
@@ -84,6 +113,7 @@ exports.postStudentAdmissionForm =  [upload.single('photo'),(req, res) => {
         email:req.body.email,
         phone:req.body.phone,
         gender:req.body.gender,
+        parent_id:req.body.parent_id,
         dob:date,
         role:'3',
         blood_grp:req.body.blood_grp,
@@ -102,6 +132,7 @@ exports.postStudentAdmissionForm =  [upload.single('photo'),(req, res) => {
     Religion.findAll({attributes:['id', 'name'] ,raw:true}).then(function (religions) {
       Section.findAll({attributes:['id', 'name'] ,raw:true}).then(function (sections) {
         CommonController.getClassnameData().then(function (classnames) {
+          User.findAll({where:{role:Constant.PARENT}, raw:true}).then(function (parents) {
           User.findOne({where:{id:req.params.id}    
           }).then(result=>{
           data = {  title: 'Student',  
@@ -112,6 +143,7 @@ exports.postStudentAdmissionForm =  [upload.single('photo'),(req, res) => {
                     sections:sections,
                     religions:religions,
                     classnames:classnames,
+                    parents:parents,
                     student:result,
                     helper:require('../public/helper')
                   }
@@ -121,6 +153,7 @@ exports.postStudentAdmissionForm =  [upload.single('photo'),(req, res) => {
        return res.json({ msg: "Something went wrong",  success:false });
    })
   })
+  })
 })
 })    
    }
@@ -129,6 +162,7 @@ exports.postStudentAdmissionForm =  [upload.single('photo'),(req, res) => {
     let image =""
     if(req.file != undefined)  {image = req.file.filename } 
     d = req.body.dob;
+
     date = d.split("/").reverse().join("-");
     User.update({
       firstname:req.body.firstname,
@@ -141,9 +175,11 @@ exports.postStudentAdmissionForm =  [upload.single('photo'),(req, res) => {
       email:req.body.email,
       phone:req.body.phone,
       gender:req.body.gender,
+      parent_id:req.body.parent_id,
       dob:date,
       role:'3',
       blood_grp:req.body.blood_grp,
+      parent_id:req.body.parent_id,
       image:image},
      { where:{id:req.body.id}}).then(result=>{
       req.flash('success-msg', "Student added successfully")  ;
