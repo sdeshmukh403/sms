@@ -3,6 +3,14 @@ let noticeController  = require('../controller/NoticeController');
 const sequelize = require('../database/sequelize_connection');
 let Notice = require('../model/notice');
 let Constant = require('../model/constant');
+let Section  = require('../model/section');
+let ClassName   = require('../model/classname');
+
+common_variables = [{role: localStorage.getItem('role'), 
+profileimg : localStorage.getItem('profileImg' ),
+username:localStorage.getItem('loginUser'),
+Constant: require('../model/constant')
+}]
 exports.getAdminDashboard = (req, res) =>{   
  //res.render('admin-dashboard', {  });
     User.count({
@@ -58,25 +66,38 @@ exports.getStudentDashboard = (req, res) =>{
 } 
 
 exports.getTeacherDashboard = (req, res) =>{
-    common_variables = [{role: localStorage.getItem('role'), 
-    profileimg : localStorage.getItem('profileImg' ),
-    username:localStorage.getItem('loginUser'),
-    Constant: require('../model/constant')
-  }]
-  data = {helper:require('../public/helper'), main_heading:'Student Dashboard', 
-   common_variables
-  }
-    res.render('student-dashboard', data);
+  
+  User.findAll({where:{teacher_id: localStorage.getItem('UserId')}, raw:true,   include: [{
+    model: Section,
+    required: true
+   },{
+    model: User ,
+    as: 'parent',
+    required: false
+   },{
+    model: ClassName ,
+    as: 'classname',
+    required: false
+   }] }).then(function(students){
+    data = {helper:require('../public/helper'), main_heading:'Student Dashboard', 
+    common_variables, students
+   }
+    res.render('teacher-dashboard', data);
+   });
 } 
  
 exports.getParentDashboard = (req, res) =>{
-    common_variables = [{role: localStorage.getItem('role'), 
-    profileimg : localStorage.getItem('profileImg' ),
-    username:localStorage.getItem('loginUser'),
-    Constant: require('../model/constant')
-  }]
-  data = {helper:require('../public/helper'), main_heading:'Student Dashboard', 
-  sub_heading:'student ', common_variables
-  }
-    res.render('student-dashboard', data);
+User.findAll({where:{parent_id: localStorage.getItem('UserId')}, raw:true,  include: [{
+    model: Section,
+    required: true
+   },{
+    model: ClassName ,
+    as: 'classname',
+    required: false
+   }] }).then(function(children){
+    data = {helper:require('../public/helper'), main_heading:'Parent Dashboard', 
+    sub_heading:'Parent ', common_variables, children
+    }
+    res.render('parent-dashboard', data);
+})    
 } 

@@ -58,7 +58,6 @@ exports.postLogin = (req, res) => {
   
   User.findOne({  attributes:['password', 'id', 'username', 'role', 'image'], raw:true ,
    where:[{email:req.body.email}]}).then( result => {
-     console.log(req.body.password);
    if(result && bcrypt.compareSync(req.body.password, result.password )){
     var token = jwt.sign({userId:result.id}, 'loginToken');
     localStorage.setItem('userToken', token)
@@ -70,24 +69,31 @@ exports.postLogin = (req, res) => {
     switch(result.role){
       case 1:
         role = 1,
-        profileimg = 'uploads/admin/'+result.image
+        profileimg = 'uploads/admin/'+result.image,
+        url = '/admin-dashboard';
       break  
+      
       case 2:
         role = 2,
-        profileimg = 'uploads/teacher/'+result.image
+        profileimg = 'uploads/teacher/'+result.image,
+        url = '/teacher-dashboard';
       break 
+
       case 3:
         role = 3,
-        profileimg = 'uploads/student/'+result.image
+        profileimg = 'uploads/student/'+result.image,
+        url = '/student-dashboard';
       break 
+      
       case 4:
         role= 4,
-        profileimg = 'uploads/parent/'+result.image
+        profileimg = 'uploads/parent/'+result.image,
+        url = '/parent-dashboard';
       break 
     }
     localStorage.setItem('profileImg', profileimg)
     localStorage.setItem('role', role)
-    res.redirect('/admin-dashboard');
+    res.redirect(url);
    } 
    req.flash('err-msg', "Credentials are invalid");
    res.redirect('/login');
@@ -241,7 +247,6 @@ let email = localStorage.getItem('email_for_reset')
       url = '/parent-dashboard'
     break 
   }
-  console.log(url)
   res.redirect(url);
 
 }

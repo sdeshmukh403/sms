@@ -1,12 +1,16 @@
 let Transport  = require('../model/transport');
-let CommonController = require('./CommonController');
 
+common_variables = [{role: localStorage.getItem('role'), 
+profileimg : localStorage.getItem('profileImg' ),
+username:localStorage.getItem('loginUser'),
+Constant: require('../model/constant')
+}]
 exports.getTransportList = (req, res) =>{
   filterWhere ={};
   if(req.query.route_name||req.query.vehicle_no||req.query.phone_no){
     if(req.query.route_name) filterWhere.route_name = req.query.route_name;
     if(req.query.vehicle_no) filterWhere.vehicle_no = req.query.vehicle_no;
-    if(req.query.phone_no) filterWhere.phone_no =req.query.phone_no;  
+    if(req.query.phone_no) filterWhere.phone_no = req.query.phone_no;  
   }
   active_path = req.path.split('/')[1]
   
@@ -15,11 +19,15 @@ exports.getTransportList = (req, res) =>{
   raw:true, order: [
     ['id', 'DESC']
 ]}).then(function (transports) {
-  res.render('transport', {title: 'Transport',
-  active_path:active_path, helper:require('../public/helper'),
+  data =  {title: 'Transport',
+  active_path:active_path,
+  helper:require('../public/helper'),
   msg: req.flash('success-msg'),
-   main_heading:'All Transports', datas: transports });  
-     });
+  main_heading:'All Transports',
+  add_update_heading: 'Add New Transport',
+   datas: transports };       
+  res.render('transport', data);
+});
 }
 
 exports.postAddTransport = (req, res) => {
@@ -61,18 +69,35 @@ exports.postAddTransport = (req, res) => {
   }
 
   exports.editTransport = (req, res) => {
-    active_path = req.path.split('/')[1]
-    Transport.findOne({where:{id:req.params.id}    
+    filterWhere ={};
+    if(req.query.route_name||req.query.vehicle_no||req.query.phone_no){
+      if(req.query.route_name) filterWhere.route_name = req.query.route_name;
+      if(req.query.vehicle_no) filterWhere.vehicle_no = req.query.vehicle_no;
+      if(req.query.phone_no) filterWhere.phone_no =req.query.phone_no;  
+    }
+    active_path = '/transport'
+    Transport.findAll({ where:filterWhere,
+      attributes:['id', 'vehicle_no', 'phone_no','route_name', 'driver_name','liences_no'] , 
+    raw:true, order: [
+      ['id', 'DESC']
+  ]}).then(function (transports) {
+    Transport.findOne({where:{ id:req.params.id}    
           }).then(transport=>{
           data = {  title: 'Transport',
-          active_path:active_path, main_heading:'All Transports', data: transport                    
+          add_update_heading: 'Update Transport',
+          active_path:active_path, 
+          main_heading:'All Transports',
+          helper:require('../public/helper'),
+          common_variables,
+          data: transport,
+          datas: transports                   
                   }    
       return res.render('transport',  data);
     }).catch(err => {
       console.log(err);
        return res.json({ msg: "Something went wrong",  success:false });
    })
-   
+  })
    }
    
    exports.updatetTransport =(req, res) => {

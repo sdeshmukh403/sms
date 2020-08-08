@@ -13,7 +13,7 @@
                             <div class="card-body">
                                 <div class="heading-layout1">
                                     <div class="item-title">
-                                        <h3>Add New Transport</h3>
+                                        <h3><%= typeof add_update_heading != 'undefined'? add_update_heading:'' %></h3>
                                     </div>                                    
                                 </div>
                                 <form class="new-added-form" method="POST" id="myform" action="<%= typeof data != 'undefined'? '/update-transport':'' %>">

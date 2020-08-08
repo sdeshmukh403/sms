@@ -99,14 +99,21 @@ router.post('/update-transport/', transportController.updatetTransport);
 //section page
 router.get('/all-sections', sectionController.getSectionList);
 router.post('/add-section', sectionController.postAddSection);
+router.get('/delete-section/:id', sectionController.deleteSection);
+router.post('/sections-bulk-delete', sectionController.deleteSections);
+
 
 //religion page
 router.get('/all-religions', religionController.getReligionList);
 router.post('/add-religion', religionController.postAddReligion);
+router.get('/delete-religion/:id', religionController.deleteReligion);
+router.post('/religions-bulk-delete', religionController.deleteReligions);
 
 //class name page
 router.get('/all-classes', classnameController.getClassnameList);
 router.post('/add-classname', classnameController.postAddClassname);
+router.get('/delete-classname/:id', classnameController.deleteClassname);
+router.post('/classnames-bulk-delete', classnameController.deleteClassnames);
 
 
 router.get('/video', function(req, res) {
